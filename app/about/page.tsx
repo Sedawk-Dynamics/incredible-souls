@@ -106,80 +106,113 @@ export default function AboutPage() {
             </RevealWrapper>
           </div>
         </section>
+{/* ── ABOUT DETAIL ─────────────────────────────────────── */}
+<section className="py-20 bg-[#FFF9F0]">
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    
+    {/* Left Image */}
+    <RevealWrapper
+      dir="left"
+      className="sticky top-28 flex justify-center lg:justify-start"
+    >
+      <div className="relative w-[300px] md:w-[360px] h-[420px] lg:h-[460px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(107,45,139,0.12)]">
+        <Image
+          src="/reshu.JPG"
+          alt="Incredible Souls healing sanctuary"
+          fill
+          className="object-cover"
+        />
 
-        {/* ── ABOUT DETAIL ─────────────────────────────────────── */}
-        <section className="py-20 bg-[#FFF9F0]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <RevealWrapper dir="left" className="sticky top-28 flex justify-center">
-              <div className="relative w-[320px] md:w-[380px] aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(107,45,139,0.15)]">
-                <Image
-                  src="/reshu.JPG"
-                  alt="Incredible Souls healing sanctuary"
-                  fill
-                  className="object-cover"
-                />
+        {/* Soft Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2D1B3D]/20 to-transparent" />
+      </div>
+    </RevealWrapper>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2D1B3D]/30 to-transparent" />
+    {/* Right Content */}
+    <RevealWrapper dir="right" className="flex flex-col gap-10">
+      
+      {/* Introduction */}
+      <div>
+        <h2 className="font-sans text-3xl lg:text-4xl font-light text-[#2D1B3D] mb-5">
+          At Incredible Souls,
+        </h2>
 
-                {/* <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4">
-                  <p className="font-body text-xs text-[#9B8BAB] uppercase tracking-widest mb-1">
-                    Our Tagline
-                  </p>
+        <p className="font-body text-base lg:text-lg leading-relaxed text-[#6B5B7B] mb-5">
+          we gently bring these layers into awareness with compassion and clarity.
+          As you begin to see the root of what you are carrying, the process of
+          release naturally begins. This creates space for emotional lightness,
+          energetic balance, and a deeper connection with your own inner wisdom.
+        </p>
 
-                  <p className="font-sans text-sm md:text-base italic text-[#6B2D8B]">
-                    &ldquo;The light that you seek lives within you. Let us help you reconnect.&rdquo;
-                  </p>
-                </div> */}
-              </div>
-            </RevealWrapper>
+        <p className="font-body text-base lg:text-lg leading-relaxed text-[#6B5B7B]">
+          The journey then moves toward realignment across the aura, body, mind,
+          emotions, and soul. You are supported in moving from confusion to clarity,
+          heaviness to peace, and limitation to self-trust.
+          <br />
+          <br />
+          At the heart of our work is empowerment. We guide you to release what
+          no longer serves you, restore inner balance, and move forward with
+          greater awareness, purpose, and trust in your own light — creating
+          harmony within yourself, with others, and with the world around you.
+        </p>
+      </div>
 
-            <RevealWrapper dir="right" className="flex flex-col gap-10">
-              {/* Introduction */}
-              <div>
-                <h2 className="font-sans text-3xl font-light text-[#2D1B3D] mb-4">At Incredible Souls,</h2>
-                <p className="font-body text-base leading-relaxed text-[#6B5B7B] mb-4">
-                  we gently bring these layers into awareness with compassion and clarity. As you begin to see the root of what you are carrying, the process of release naturally begins. This creates space for emotional lightness, energetic balance, and a deeper connection with your own inner wisdom.
+      {/* Mission */}
+      {/*
+      <div className="p-6 rounded-2xl bg-[#E9DFF0]/40 border border-[#E9DFF0]">
+        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">
+          Our Mission
+        </h3>
+        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
+          To nurture holistic transformation by supporting communities across the
+          essential pillars of life — food, employment, education, health and
+          environment. We strive to create conscious, self-sustaining ecosystems
+          where well-being, livelihood and inner growth coexist in harmony.
+        </p>
+      </div>
+      */}
 
-                </p>
-                <p className="font-body text-base leading-relaxed text-[#6B5B7B]">
-                  The journey then moves toward realignment across the aura, body, mind, emotions, and soul. You are supported in moving from confusion to clarity, heaviness to peace, and limitation to self-trust.
-                  At the heart of our work is empowerment. We guide you to release what no longer serves you, restore inner balance, and move forward with greater awareness, purpose, and trust in your own light — creating harmony within yourself, with others, and with the world around you.
-                </p>
-              </div>
+      {/* Vision */}
+      {/*
+      <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#E9DFF0]">
+        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">
+          Our Vision
+        </h3>
+        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
+          A world where every soul lives in alignment with its highest truth —
+          free from fear, separation and karmic entanglements. We envision healing
+          as a sacred return to wholeness, where individuals rise in love,
+          embody their truth and radiate peace into their families, communities
+          and the world.
+        </p>
+      </div>
+      */}
 
-              {/* Mission */}
-              {/* <div className="p-6 rounded-2xl bg-[#E9DFF0]/40 border border-[#E9DFF0]">
-                <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">Our Mission</h3>
-                <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-                  To nurture holistic transformation by supporting communities across the essential pillars of life — food, employment, education, health and environment. We strive to create conscious, self-sustaining ecosystems where well-being, livelihood and inner growth coexist in harmony.
-                </p>
-              </div> */}
+      {/* Why Choose */}
+      {/*
+      <div>
+        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-4">
+          Why Choose Incredible Souls?
+        </h3>
 
-              {/* Vision */}
-              {/* <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#E9DFF0]">
-                <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">Our Vision</h3>
-                <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-                  A world where every soul lives in alignment with its highest truth — free from fear, separation and karmic entanglements. We envision healing as a sacred return to wholeness, where individuals rise in love, embody their truth and radiate peace into their families, communities and the world.
-                </p>
-              </div> */}
+        <p className="font-body text-sm leading-relaxed text-[#6B5B7B] mb-4">
+          At Incredible Souls, we believe that every soul is incredible — a
+          unique light of divine purpose and inner wisdom, waiting to awaken.
+        </p>
 
-              {/* Why choose */}
-              {/* <div>
-                <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-4">Why Choose Incredible Souls?</h3>
-                <p className="font-body text-sm leading-relaxed text-[#6B5B7B] mb-4">
-                At Incredible Souls, we believe that every soul is incredible — a unique light of divine purpose and inner wisdom, waiting to awaken.
-                </p>
-                <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-                
-Growth Sequence
-The Journey of Transformation at Incredible Souls
-At Incredible Souls, growth is seen as a gentle unfolding of the self. Every seeker begins from a different place, yet the journey often moves through a beautiful sequence of awareness, healing, alignment and expansion. Our role is to support this inner movement with compassion and spiritual guidance.
-                </p>
-              </div> */}
-            </RevealWrapper>
-          </div>
-        </section>
-
+        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
+          Growth Sequence — The Journey of Transformation at Incredible Souls.
+          At Incredible Souls, growth is seen as a gentle unfolding of the self.
+          Every seeker begins from a different place, yet the journey often
+          moves through a beautiful sequence of awareness, healing, alignment
+          and expansion. Our role is to support this inner movement with
+          compassion and spiritual guidance.
+        </p>
+      </div>
+      */}
+    </RevealWrapper>
+  </div>
+</section>
 
 
 
