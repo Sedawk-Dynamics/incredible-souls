@@ -387,53 +387,7 @@ export default function HomePage() {
   </div>
 </section>
 
-        {/* ── SERVICES OVERVIEW ───────────────────────��────────────── */}
-        {/* <section className="py-24 bg-[#E9DFF0]/30 texture-bg">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <RevealWrapper className="text-center mb-16">
-              <div className="ornament-divider justify-center mb-4">
-                <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase">What We Offer</span>
-              </div>
-              <h2 className="font-sans text-4xl lg:text-5xl font-light text-[#2D1B3D] text-balance">
-                Healing Modalities &{' '}
-                <span className="italic text-brand-gradient">Sacred Sciences</span>
-              </h2>
-            </RevealWrapper>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((svc, i) => (
-                <RevealWrapper key={svc.title} dir="up">
-                  <Link
-                    href={svc.href}
-                    className="group premium-card flex flex-col gap-4 bg-[#FFF9F0] rounded-2xl p-7 border border-[#E9DFF0] hover:border-[#9B59B6]/30 transition-all"
-                    style={{ transitionDelay: `${i * 0.05}s` }}
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-[#E9DFF0] flex items-center justify-center text-xl text-[#9B59B6] group-hover:bg-[#9B59B6] group-hover:text-white transition-all duration-300">
-                      {svc.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-sans text-lg font-medium text-[#2D1B3D] mb-2 group-hover:text-[#6B2D8B] transition-colors">{svc.title}</h3>
-                      <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">{svc.desc}</p>
-                    </div>
-                    <span className="font-body text-xs font-medium text-[#9B59B6] flex items-center gap-1 mt-auto group-hover:gap-2 transition-all">
-                      Learn More <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </Link>
-                </RevealWrapper>
-              ))}
-            </div>
-
-            <RevealWrapper className="text-center mt-10">
-              <Link
-                href="/healing"
-                className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#9B59B6]/40 text-[#6B2D8B] font-body text-sm font-medium rounded-full hover:bg-[#9B59B6] hover:text-white hover:border-[#9B59B6] transition-all duration-300"
-              >
-                View All Healing Services
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </RevealWrapper>
-          </div>
-        </section> */}
+       
 
         {/* ── HEALING MODALITIES & SACRED SCIENCES ──────────────────── */}
         <section className="py-12 bg-white">
@@ -446,21 +400,21 @@ export default function HomePage() {
                   id: 'karmic-clearance-karuna-reiki',
                   title: 'Karmic Clearance & Karuna Reiki',
                   description:
-                    'Clear deep karmic imprints and channel the gentle power of Karuna Reiki for profound emotional, mental and spiritual healing.',
+                    'An advanced compassionate healing system for karmic release, emotional healing, spiritual growth and multidimensional energy transformation.',
                   image: '/Karmic Clearance & Karuna Reiki.webp',
                 },
                 {
                   id: 'psychic-surgery-psychic-being',
                   title: 'Psychic Surgery & Psychic Being',
                   description:
-                    'Learn powerful energetic healing techniques to remove blockages, activate inner awareness and align with higher consciousness.',
+                    'A compassionate multidimensional healing system for karmic release, energetic cleansing, emotional healing and soul alignment.',
                   image: '/Psychic Surgery & Psychic Being.webp',
                 },
                 {
                   id: 'money-abundance',
                   title: 'Money & Abundance',
                   description:
-                    'Dissolve limiting beliefs around wealth, activate abundance energy and align yourself with prosperity and financial flow.',
+                    'A transformational healing journey to release scarcity, activate abundance consciousness and align with prosperity, stability, and soulful receiving.',
                   image: '/Money abundance.webp',
                 },
               ]}
