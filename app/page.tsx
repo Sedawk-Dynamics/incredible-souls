@@ -234,6 +234,7 @@ export default function HomePage() {
 {/* ── LEARNING COURSES ─────────────────────────────────────── */}
 <section className="py-12 bg-[#E9DFF0]/30 overflow-hidden">
   <div className="max-w-7xl mx-auto px-4 lg:px-8">
+
     {/* Heading */}
     <div className="text-center mb-8 hidden lg:block">
       <span className="text-xs tracking-[0.25em] text-[#9B59B6] uppercase">
@@ -251,57 +252,57 @@ export default function HomePage() {
     {/* Courses */}
     <div className="space-y-6">
       {[
-       {
-  id: "1",
-  title: "Standard Lama Healing",
-  description:
-    "A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.",
-  image: "/images/standard-lama-healing.jpg",
-  date: "8th June – 9th June",
-  language: "Online",
-  price: "₹5,550",
-  startsIn: "3 Days",
-},
-{
-  id: "2",
-  title: "Advanced Lama Healing",
-  description:
-    "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
-  image: "/lama-fera-advanced-healing .jpeg",
-  date: "10th June – 11th June",
-  language: "Online",
-  price: "₹5,550",
-  startsIn: "5 Days",
-  
-},
-{
-  id: "3",
-  title: "Relationships & Inner Child Healing",
-  description:
-    "Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.",
-  image: "/images/inner-child-healing.jpg",
-  date: "29th June – 3rd July",
-  language: "Online",
-  price: "₹15,000",
-  startsIn: "10 Days",
-},
-{
-  id: "4",
-  title: "Past Life Regressions Therapy Course",
-  description:
-    "An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.",
-  image: "/images/past-life-regression.jpg",
-  date: "31st July – 7th August",
-  language: "Online",
-  price: "₹21,600",
-  startsIn: "15 Days",
-},
+        {
+          id: "1",
+          title: "Standard Lama Healing",
+          description:
+            "A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.",
+          image: "/images/standard-lama-healing.jpg",
+          date: "8th June – 9th June",
+          language: "Online",
+          price: "₹5,550",
+          startsIn: "3 Days",
+        },
+        {
+          id: "2",
+          title: "Advanced Lama Healing",
+          description:
+            "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
+          image: "/lama-fera-advanced-healing .jpeg",
+          date: "10th June – 11th June",
+          language: "Online",
+          price: "₹5,550",
+          startsIn: "5 Days",
+        },
+        {
+          id: "3",
+          title: "Relationships & Inner Child Healing",
+          description:
+            "Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.",
+          image: "/images/inner-child-healing.jpg",
+          date: "29th June – 3rd July",
+          language: "Online",
+          price: "₹15,000",
+          startsIn: "10 Days",
+        },
+        {
+          id: "4",
+          title: "Past Life Regressions Therapy Course",
+          description:
+            "An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.",
+          image: "/images/past-life-regression.jpg",
+          date: "31st July – 7th August",
+          language: "Online",
+          price: "₹21,600",
+          startsIn: "15 Days",
+        },
       ].map((workshop) => (
         <div
           key={workshop.id}
           className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
         >
           <div className="flex flex-col lg:flex-row">
+            
             {/* Left Image */}
             <div className="relative lg:w-[36%] h-[260px] p-4">
               <div className="relative h-full overflow-hidden rounded-tl-[50px] rounded-br-[50px]">
@@ -310,32 +311,26 @@ export default function HomePage() {
                   alt={workshop.title}
                   className="w-full h-full object-cover"
                 />
-
-                {/* Starts Badge */}
-                {/* <div className="absolute top-5 left-5 bg-white rounded-[22px] px-5 py-3 shadow-md">
-                  <p className="text-[13px] text-gray-500">
-                    Starts in
-                  </p>
-
-                  <p className="font-semibold text-[#2D1B3D] text-2xl">
-                    {workshop.startsIn}
-                  </p>
-                </div> */}
               </div>
             </div>
 
             {/* Right Content */}
             <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
+              
+              {/* Title */}
               <h3 className="text-2xl lg:text-[38px] font-semibold text-[#2D1B3D] mb-4">
                 {workshop.title}
               </h3>
 
+              {/* Description */}
               <p className="text-[#6D6875] text-base leading-relaxed mb-6 max-w-3xl">
                 {workshop.description}
               </p>
 
-              {/* Info Pills */}
-              <div className="flex flex-wrap gap-4 mb-7">
+              {/* Info Pills + Register Button */}
+              <div className="flex flex-wrap items-center gap-4 mb-7">
+                
+                {/* Date */}
                 <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
                   <span>📅</span>
                   <span className="text-sm text-[#4A4453]">
@@ -343,6 +338,7 @@ export default function HomePage() {
                   </span>
                 </div>
 
+                {/* Language */}
                 <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
                   <span>🌐</span>
                   <span className="text-sm text-[#4A4453]">
@@ -350,57 +346,29 @@ export default function HomePage() {
                   </span>
                 </div>
 
-                 <div
-    className={`flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-300
-    ${
-      activeCourse === workshop.id
-        ? "bg-[#066b67] text-white"
-        : "bg-[#0B8C87] text-white"
-    }`}
-  >
-    <span className="font-semibold text-xl">
-      Register Now
-    </span>
+                {/* Register Button */}
+                <div
+                  onClick={() => setActiveCourse(workshop.id)}
+                  className={`flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 w-fit cursor-pointer
+                  ${
+                    activeCourse === workshop.id
+                      ? "bg-[#066b67] text-white"
+                      : "bg-[#0B8C87] text-white"
+                  }`}
+                >
+                  <span className="font-semibold text-lg lg:text-xl">
+                    Register Now
+                  </span>
 
-   
-  </div>
+                  {/* Divider */}
+                  <span className="w-px h-6 bg-white/30" />
+
+                  {/* Price */}
+                  <span className="font-bold text-lg lg:text-xl">
+                    {workshop.price}
+                  </span>
+                </div>
               </div>
-
-              {/* Register Button */}
-<div
-  onClick={() => setActiveCourse(workshop.id)}
-  className="inline-flex items-center cursor-pointer w-fit overflow-hidden rounded-full"
->
-  {/* Left Green Part */}
-  {/* <div
-    className={`flex items-center gap-3 px-8 py-4 rounded-l-full transition-all duration-300
-    ${
-      activeCourse === workshop.id
-        ? "bg-[#066b67] text-white"
-        : "bg-[#0B8C87] text-white"
-    }`}
-  >
-    <span className="font-semibold text-xl">
-      Register Now
-    </span>
-
-   
-  </div> */}
-
-  {/* Price */}
-  {/* <div
-    className={`px-8 py-4 rounded-r-full border border-[#0B8C87] flex items-center justify-center transition-all duration-300
-    ${
-      activeCourse === workshop.id
-        ? "bg-[#E8D7EF]"
-        : "bg-[#F4EDF7]"
-    }`}
-  >
-    <span className="text-[#7B2FA3] text-[42px] font-bold leading-none">
-      {workshop.price}
-    </span>
-  </div> */}
-</div>
             </div>
           </div>
         </div>
