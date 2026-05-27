@@ -14,21 +14,27 @@ interface HealingModality {
   image: string;
 }
 
-interface HealingModalitiesListProps {
+interface HealingModalitiesList1Props {
   modalities: HealingModality[];
   title: string;
   subtitle?: string;
   sectionLabel?: string;
 }
 
-export function HealingModalitiesList({ modalities, title, subtitle, sectionLabel }: HealingModalitiesListProps) {
+export function HealingModalitiesList1({
+  modalities,
+  title,
+  subtitle,
+  sectionLabel,
+}: HealingModalitiesList1Props) {
   const isMobile = useIsMobile();
 
+  // Mobile Card
   const modalityCard = (modality: HealingModality) => (
     <div className="h-full">
       <Link href={`/healing/${modality.id}`}>
         <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/5 to-accent/10 h-80 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl">
-          {/* Image Background */}
+          {/* Image */}
           <div className="relative h-48 overflow-hidden bg-accent/10">
             <Image
               src={modality.image}
@@ -46,21 +52,24 @@ export function HealingModalitiesList({ modalities, title, subtitle, sectionLabe
                 {modality.title}
               </h3>
             </div>
+
             <p className="text-sm text-muted-foreground line-clamp-2">
               {modality.description}
             </p>
           </div>
 
-          {/* Hover Overlay */}
+          {/* Hover Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
       </Link>
     </div>
   );
 
+  // Desktop Card
   const modalityCardDesktop = (modality: HealingModality) => (
     <div className="group bg-white rounded-3xl overflow-hidden border border-[#E9DFF0] hover:border-[#9B59B6]/30 hover:shadow-[0_20px_60px_rgba(107,45,139,0.12)] transition-all duration-300 flex flex-row gap-8 p-8">
-      {/* Image - Prominent */}
+      
+      {/* Image */}
       <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-2xl shadow-md group-hover:shadow-lg transition-shadow">
         <Image
           src={modality.image}
@@ -70,77 +79,88 @@ export function HealingModalitiesList({ modalities, title, subtitle, sectionLabe
         />
       </div>
 
-      {/* Content Section */}
+      {/* Content */}
       <div className="flex-1 flex flex-col justify-between gap-4">
-        {/* Title and Description */}
+        {/* Title + Description */}
         <div className="space-y-3">
           <h3 className="font-sans text-2xl font-bold text-[#2D1B3D] group-hover:text-[#6B2D8B] transition-colors leading-tight">
             {modality.title}
           </h3>
 
-          {/* Description */}
           <p className="font-body text-base text-[#6B5B7B] leading-relaxed">
             {modality.description}
           </p>
         </div>
 
-        {/* CTA Buttons - Horizontal Layout */}
+        {/* CTA */}
         <div className="flex items-center gap-4 pt-2">
-          {/* Join The Course - Outline Button */}
-          {/* <button className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-[#9B59B6] text-[#6B2D8B] font-body font-semibold text-sm rounded-full hover:bg-[#9B59B6]/5 transition-all duration-300">
-            View All Courses
-          </button> */}
-
-          {/* Register Now - Primary Button */}
           <button className="inline-flex items-center justify-center gap-2 px-7 py-2.5 bg-[#9B59B6] text-white font-body font-semibold text-sm rounded-full hover:bg-[#6B2D8B] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(155,89,182,0.35)]">
             Register Now
             <ArrowRight className="w-4 h-4" />
           </button>
-
-          {/* Learn More Link */}
-          {/* <Link
-            href={`/healing/${modality.id}`}
-            className="ml-auto inline-flex items-center gap-2 text-[#9B59B6] font-body font-semibold text-sm hover:text-[#6B2D8B] transition-colors group/link"
-          >
-            Learn More
-            <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-          </Link> */}
         </div>
       </div>
     </div>
   );
 
+  // Mobile View
   if (isMobile) {
     return (
       <div className="w-full space-y-8">
         <div>
           {sectionLabel && (
             <div className="mb-3">
-              <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase font-semibold">{sectionLabel}</span>
+              <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase font-semibold">
+                {sectionLabel}
+              </span>
             </div>
           )}
-          <h2 className="font-serif text-3xl font-bold text-[#2D1B3D] mb-3">{title}</h2>
-          {subtitle && <p className="font-body text-base text-[#6B5B7B] leading-relaxed">{subtitle}</p>}
+
+          <h2 className="font-serif text-3xl font-bold text-[#2D1B3D] mb-3">
+            {title}
+          </h2>
+
+          {subtitle && (
+            <p className="font-body text-base text-[#6B5B7B] leading-relaxed">
+              {subtitle}
+            </p>
+          )}
         </div>
+
         <MobileCarousel
-          items={modalities.map((modality) => modalityCard(modality))}
+          items={modalities.map((modality) =>
+            modalityCard(modality)
+          )}
         />
       </div>
     );
   }
 
-  // Desktop layout - vertical list
+  // Desktop View
   return (
     <div className="w-full">
+      {/* Heading */}
       <div className="mb-6">
         {sectionLabel && (
           <div className="mb-4">
-            <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase font-semibold">{sectionLabel}</span>
+            <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase font-semibold">
+              {sectionLabel}
+            </span>
           </div>
         )}
-        <h2 className="font-serif text-5xl font-bold text-[#2D1B3D] mb-4">{title}</h2>
-        {subtitle && <p className="font-body text-lg text-[#6B5B7B] max-w-3xl leading-relaxed">{subtitle}</p>}
+
+        <h2 className="font-serif text-5xl font-bold text-[#2D1B3D] mb-4">
+          {title}
+        </h2>
+
+        {subtitle && (
+          <p className="font-body text-lg text-[#6B5B7B] max-w-3xl leading-relaxed">
+            {subtitle}
+          </p>
+        )}
       </div>
+
+      {/* Cards */}
       <div className="space-y-5">
         {modalities.map((modality) => (
           <div key={modality.id}>
@@ -148,13 +168,14 @@ export function HealingModalitiesList({ modalities, title, subtitle, sectionLabe
           </div>
         ))}
       </div>
-      {/* View All Courses Button - Moved to bottom */}
+
+      {/* View All Button */}
       <div className="flex justify-center mt-8 pt-6 border-t border-[#E9DFF0]">
         <Link
           href="/courses"
           className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#9B59B6]/40 text-[#6B2D8B] font-body text-base font-medium rounded-full hover:bg-[#9B59B6] hover:text-white hover:border-[#9B59B6] transition-all duration-300 hover:shadow-[0_6px_25px_rgba(107,45,139,0.25)]"
         >
-          View All Courses
+          View All Healings
           <ArrowRight className="w-5 h-5" />
         </Link>
       </div>

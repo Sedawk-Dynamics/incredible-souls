@@ -46,9 +46,9 @@ export default function VerticalsGrid() {
     setExpandedCard(expandedCard === id ? null : id)
   }
   return (
-    <section className="py-24 bg-gradient-to-b from-[#FFF9F0] to-[#F5F0F8]">
+    <section className="py-12 bg-gradient-to-b from-[#FFF9F0] to-[#F5F0F8]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <div className="ornament-divider justify-center mb-4">
             <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase">
               Incredible Souls Verticals
@@ -63,7 +63,7 @@ export default function VerticalsGrid() {
         </div>
 
         {/* Verticals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {verticals.map((vertical) => {
             const isExpanded = expandedCard === vertical.id
 

@@ -9,6 +9,7 @@ import TestimonialCarousel from '@/components/testimonial-carousel'
 import ShopCarousel from '@/components/shop-carousel'
 import HealingModalities from '@/components/healing-modalities'
 import { HealingModalitiesList } from '@/components/healing-modalities-list'
+import { HealingModalitiesList1 } from '@/components/healing-modalities-list1'
 import { CoursesCarousel } from '@/components/courses-carousel'
 import { GenericCarousel } from '@/components/generic-carousel'
 import { PrinciplesCarousel } from '@/components/principles-carousel'
@@ -147,22 +148,22 @@ export default function HomePage() {
         {/* ── HERO (50/50 Video) ───────────────────────────────────── */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 lg:pt-0"
+          className="relative flex items-center justify-center overflow-hidden pt-24 pb-12 lg:pt-16 lg:pb-16"
           style={{ background: 'linear-gradient(160deg, #FFF9F0 0%, #F5EFF8 40%, #E9DFF0 100%)' }}
         >
           <div className="absolute inset-0 texture-bg opacity-20" />
           {/* <ParticleOrb size={120} x="8%" y="15%" delay={0} />
           <ParticleOrb size={80} x="85%" y="10%" delay={1.5} /> */}
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-15">
             {/* Left: Text Content */}
             <div className="flex flex-col gap-6 animate-fadeInLeft">
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#E9DFF0]/70 backdrop-blur-sm border border-[#9B59B6]/20 w-fit mt-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#9B59B6]" />
-                <span className="font-body text-xs font-medium tracking-[0.2em] text-[#6B2D8B] uppercase">
-                  Heal Deeply. Awaken Fully.
-                </span>
-              </div>
+              <div className="inline-flex items-center gap-2 px-5 py-2 pt-4 rounded-full bg-[#E9DFF0]/70 backdrop-blur-sm border border-[#9B59B6]/20 w-fit mt-3">
+  <span className="w-1.5 h-1.5 rounded-full bg-[#9B59B6]" />
+  <span className="font-body text-xs font-medium tracking-[0.2em] text-[#6B2D8B] uppercase">
+    Heal Deeply. Awaken Fully.
+  </span>
+</div>
 
               <h1 className="font-sans text-5xl lg:text-6xl font-light leading-[1.1] text-[#2D1B3D] text-balance">
                 The light that <span className="text-brand-gradient font-medium italic">you seek</span> lives within you
@@ -208,7 +209,7 @@ export default function HomePage() {
         </section>
 
         {/* ── STATS ────────────────────────────────────────────────── */}
-        <section className="bg-[#E9DFF0]/40 py-16 texture-bg">
+        <section className="bg-[#E9DFF0]/40 py-10 texture-bg">
           <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => {
               const Icon = stat.icon
@@ -230,176 +231,192 @@ export default function HomePage() {
 
 
 
-        {/* ── LEARNING COURSES ─────────────────────────────────────── */}
-        <section className="py-20 bg-[#E9DFF0]/30 texture-bg overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8">
-            {/* Heading */}
-            <RevealWrapper className="text-center mb-14 hidden lg:block">
-              <div className="ornament-divider justify-center mb-4">
-                <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase">
-                  Learning Courses
-                </span>
+{/* ── LEARNING COURSES ─────────────────────────────────────── */}
+<section className="py-12 bg-[#E9DFF0]/30 overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 lg:px-8">
+    {/* Heading */}
+    <div className="text-center mb-8 hidden lg:block">
+      <span className="text-xs tracking-[0.25em] text-[#9B59B6] uppercase">
+        Learning Courses
+      </span>
+
+      <h2 className="text-4xl lg:text-5xl font-light text-[#2D1B3D] mt-3">
+        Upcoming{" "}
+        <span className="italic text-[#8B4BB3]">
+          Workshops
+        </span>
+      </h2>
+    </div>
+
+    {/* Courses */}
+    <div className="space-y-6">
+      {[
+       {
+  id: "1",
+  title: "Standard Lama Healing",
+  description:
+    "A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.",
+  image: "/images/standard-lama-healing.jpg",
+  date: "8th June – 9th June",
+  language: "Online",
+  price: "₹5,550",
+  startsIn: "3 Days",
+},
+{
+  id: "2",
+  title: "Advanced Lama Healing",
+  description:
+    "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
+  image: "/lama-fera-advanced-healing .jpeg",
+  date: "10th June – 11th June",
+  language: "Online",
+  price: "₹5,550",
+  startsIn: "5 Days",
+},
+{
+  id: "3",
+  title: "Relationships & Inner Child Healing",
+  description:
+    "Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.",
+  image: "/images/inner-child-healing.jpg",
+  date: "29th June – 3rd July",
+  language: "Online",
+  price: "₹15,000",
+  startsIn: "10 Days",
+},
+{
+  id: "4",
+  title: "Past Life Regressions Therapy Course",
+  description:
+    "An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.",
+  image: "/images/past-life-regression.jpg",
+  date: "31st July – 7th August",
+  language: "Online",
+  price: "₹21,600",
+  startsIn: "15 Days",
+},
+      ].map((workshop) => (
+        <div
+          key={workshop.id}
+          className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+        >
+          <div className="flex flex-col lg:flex-row">
+            {/* Left Image */}
+            <div className="relative lg:w-[36%] h-[260px] p-4">
+              <div className="relative h-full overflow-hidden rounded-tl-[50px] rounded-br-[50px]">
+                <img
+                  src={workshop.image}
+                  alt={workshop.title}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Starts Badge */}
+                {/* <div className="absolute top-5 left-5 bg-white rounded-[22px] px-5 py-3 shadow-md">
+                  <p className="text-[13px] text-gray-500">
+                    Starts in
+                  </p>
+
+                  <p className="font-semibold text-[#2D1B3D] text-2xl">
+                    {workshop.startsIn}
+                  </p>
+                </div> */}
               </div>
-
-              <h2 className="font-sans text-4xl lg:text-5xl font-light text-[#2D1B3D] mb-3">
-                Upcoming{" "}
-                <span className="italic text-brand-gradient">
-                  Workshops
-                </span>
-              </h2>
-            </RevealWrapper>
-
-            {/* Courses */}
-            <div className="space-y-6">
-              {[
-                {
-                  id: "1",
-                  title: "Standard Lama Healing",
-                  description:
-                    "A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.",
-                  image: "/images/standard-lama-healing.jpg",
-                  date: "8th June – 9th June",
-                  language: "Online",
-                  price: "₹5,550",
-                  startsIn: "3 Days",
-                },
-                {
-                  id: "2",
-                  title: "Advanced Lama Healing",
-                  description:
-                    "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
-                  image: "/images/advanced-lama-healing.jpg",
-                  date: "10th June – 11th June",
-                  language: "Online",
-                  price: "₹5,550",
-                  startsIn: "5 Days",
-                },
-                {
-                  id: "3",
-                  title: "Relationships & Inner Child Healing",
-                  description:
-                    "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
-                  image: "/images/inner-child-healing.jpg",
-                  date: "29th June – 3rd July",
-                  language: "Online",
-                  price: "₹15,000",
-                  startsIn: "10 Days",
-                },
-                {
-                  id: "4",
-                  title: "Past Life Regressions Therapy Course",
-                  description:
-                    "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
-                  image: "/images/past-life-regression.jpg",
-                  date: "31st July – 7th August",
-                  language: "Online",
-                  price: "₹21,600",
-                  startsIn: "15 Days",
-                },
-              ].map((workshop) => (
-                <div
-                  key={workshop.id}
-                  className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[26px] overflow-hidden shadow-sm"
-                >
-                  <div className="flex flex-col lg:flex-row">
-                    {/* Left Image */}
-                    <div className="relative lg:w-[30%] h-[220px]">
-                      <img
-                        src={workshop.image}
-                        alt={workshop.title}
-                        className="w-full h-full object-cover"
-                      />
-
-                      {/* Starts Badge */}
-                      <div className="absolute top-4 left-4 bg-white rounded-2xl px-4 py-2 shadow-md">
-                        <p className="text-[11px] text-gray-500">
-                          Starts in
-                        </p>
-
-                        <p className="font-semibold text-[#2D1B3D] text-sm">
-                          {workshop.startsIn}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right Content */}
-                    <div className="flex-1 p-5 lg:p-6 flex flex-col justify-center">
-                      <h3 className="text-2xl lg:text-[28px] font-semibold text-[#2D1B3D] mb-3">
-                        {workshop.title}
-                      </h3>
-
-                      <p className="text-[#6D6875] text-sm leading-relaxed mb-5 max-w-3xl">
-                        {workshop.description}
-                      </p>
-
-                      {/* Info Pills */}
-                      <div className="flex flex-wrap gap-3 mb-5">
-                        <div className="bg-white border border-[#E7E0EC] rounded-xl px-4 py-2 flex items-center gap-2 shadow-sm">
-                          <span>📅</span>
-                          <span className="text-sm text-[#4A4453]">
-                            {workshop.date}
-                          </span>
-                        </div>
-
-                        <div className="bg-white border border-[#E7E0EC] rounded-xl px-4 py-2 flex items-center gap-2 shadow-sm">
-                          <span>🌐</span>
-                          <span className="text-sm text-[#4A4453]">
-                            {workshop.language}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Clubbed Button */}
-                      <div
-                        onClick={() => setActiveCourse(workshop.id)}
-                        className="inline-flex items-center cursor-pointer"
-                      >
-                        {/* Register */}
-                        <div
-                          className={`px-7 py-3 rounded-l-full font-semibold text-base transition-all duration-300
-                  ${activeCourse === workshop.id
-                              ? "bg-[#066b67] text-white"
-                              : "bg-[#0B8C87] text-white"
-                            }`}
-                        >
-                          Register Now
-                        </div>
-
-                        {/* Course Fee */}
-                        <div
-                          className={`px-6 py-3 rounded-r-full border flex items-center transition-all duration-300
-                  ${activeCourse === workshop.id
-                              ? "bg-[#E8D7EF] border-[#0B8C87]"
-                              : "bg-[#F4EDF7] border-[#E2D1E8]"
-                            }`}
-                        >
-                          <span className="text-[#9B8BAB] text-sm mr-2">
-                            Course Fee
-                          </span>
-
-                          <span className="text-[#7B2FA3] text-xl font-bold">
-                            {workshop.price}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
 
-            {/* View All */}
-            <RevealWrapper className="text-center mt-10">
-              <Link
-                href="/courses"
-                className="inline-flex items-center gap-2 px-8 py-3 border border-[#9B59B6]/40 text-[#6B2D8B] rounded-full hover:bg-[#9B59B6] hover:text-white transition-all duration-300"
-              >
-                View All Workshops
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </RevealWrapper>
+            {/* Right Content */}
+            <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
+              <h3 className="text-2xl lg:text-[38px] font-semibold text-[#2D1B3D] mb-4">
+                {workshop.title}
+              </h3>
+
+              <p className="text-[#6D6875] text-base leading-relaxed mb-6 max-w-3xl">
+                {workshop.description}
+              </p>
+
+              {/* Info Pills */}
+              <div className="flex flex-wrap gap-4 mb-7">
+                <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
+                  <span>📅</span>
+                  <span className="text-sm text-[#4A4453]">
+                    {workshop.date}
+                  </span>
+                </div>
+
+                <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
+                  <span>🌐</span>
+                  <span className="text-sm text-[#4A4453]">
+                    {workshop.language}
+                  </span>
+                </div>
+
+                 <div
+    className={`flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-300
+    ${
+      activeCourse === workshop.id
+        ? "bg-[#066b67] text-white"
+        : "bg-[#0B8C87] text-white"
+    }`}
+  >
+    <span className="font-semibold text-xl">
+      Register Now
+    </span>
+
+   
+  </div>
+              </div>
+
+              {/* Register Button */}
+<div
+  onClick={() => setActiveCourse(workshop.id)}
+  className="inline-flex items-center cursor-pointer w-fit overflow-hidden rounded-full"
+>
+  {/* Left Green Part */}
+  {/* <div
+    className={`flex items-center gap-3 px-8 py-4 rounded-l-full transition-all duration-300
+    ${
+      activeCourse === workshop.id
+        ? "bg-[#066b67] text-white"
+        : "bg-[#0B8C87] text-white"
+    }`}
+  >
+    <span className="font-semibold text-xl">
+      Register Now
+    </span>
+
+   
+  </div> */}
+
+  {/* Price */}
+  {/* <div
+    className={`px-8 py-4 rounded-r-full border border-[#0B8C87] flex items-center justify-center transition-all duration-300
+    ${
+      activeCourse === workshop.id
+        ? "bg-[#E8D7EF]"
+        : "bg-[#F4EDF7]"
+    }`}
+  >
+    <span className="text-[#7B2FA3] text-[42px] font-bold leading-none">
+      {workshop.price}
+    </span>
+  </div> */}
+</div>
+            </div>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+
+    {/* View All */}
+    <div className="text-center mt-6">
+      <Link
+        href="/courses"
+        className="inline-flex items-center gap-2 px-8 py-3 border border-[#9B59B6]/40 text-[#6B2D8B] rounded-full hover:bg-[#9B59B6] hover:text-white transition-all duration-300"
+      >
+        View All Workshops
+      </Link>
+    </div>
+  </div>
+</section>
 
         {/* ── SERVICES OVERVIEW ───────────────────────��────────────── */}
         {/* <section className="py-24 bg-[#E9DFF0]/30 texture-bg">
@@ -450,7 +467,7 @@ export default function HomePage() {
         </section> */}
 
         {/* ── HEALING MODALITIES & SACRED SCIENCES ──────────────────── */}
-        <section className="py-24 bg-white">
+        <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <HealingModalitiesList
               sectionLabel="What We Offer"
@@ -488,9 +505,9 @@ export default function HomePage() {
 
 
         {/* ── HEALING SESSIONS ─────────────────────────────────────── */}
-        <section className="pt-0 pb-24 mt-0 bg-white">
+        <section className="pt-0 pb-12 mt-0 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <HealingModalitiesList
+            <HealingModalitiesList1
               // sectionLabel="Healing Sessions"
               // title="Healing Sessions & Energy Work"
               // subtitle="Transform your energy, emotions and inner well-being through guided healing modalities."
@@ -633,9 +650,9 @@ export default function HomePage() {
         />
 
         {/* ── SHOP CAROUSEL ─────────────────────────────────────────── */}
-        <section className="py-24 bg-[#FFF9F0]">
+        <section className="py-12 bg-[#FFF9F0]">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <RevealWrapper className="text-center mb-16">
+            <RevealWrapper className="text-center mb-8">
               <div className="ornament-divider justify-center mb-4">
                 <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase">Sacred Wellness Shop</span>
               </div>
@@ -656,9 +673,9 @@ export default function HomePage() {
 
 
         {/* ── TESTIMONIALS CAROUSEL ────────────────────────────────── */}
-        <section className="py-24 bg-[#FFF9F0]">
+        <section className="py-12 bg-[#FFF9F0]">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <RevealWrapper className="text-center mb-16">
+            <RevealWrapper className="text-center mb-8">
               <div className="ornament-divider justify-center mb-4">
                 <span className="font-body text-xs tracking-[0.25em] text-[#9B59B6] uppercase">Transformed Voices</span>
               </div>
@@ -676,7 +693,7 @@ export default function HomePage() {
 
         {/* ── CTA BANNER ───────────────────────────────────────────── */}
         <section
-          className="py-24 relative text-center"
+          className="py-16 relative text-center"
           style={{
             background: 'linear-gradient(135deg, #6B2D8B 0%, #9B59B6 50%, #E87BB0 100%)',
           }}

@@ -52,17 +52,17 @@ const teamMembers = [
     name: 'Reshu Gupta',
     designation: 'Founder & Director',
     role: 'Spiritual Coach · Soul Alchemist',
-    bio: 'Reshu Gupta is a visionary spiritual healer and intuitive mentor who guides individuals through deep transformation and awakening. Her mission is to create a safe space where every soul reconnects with its true essence. Called to sacred places including Tiruvannamalai, Rishikesh, Ujjain, Dakshineswar Kali, Shirdi, and the caves of Vashishta and Mahavatar Babaji, her journey has been one of profound spiritual initiation, inner healing, and soulful transformation.',
-    image: '/r1.jpeg',
+    bio: 'Reshu Gupta’s journey is rooted in inner awakening, spiritual exploration, and a deep calling towards healing and soul transformation. Through meditation, sacred experiences, and intuitive understanding, she has developed a compassionate and grounded approach that gently supports individuals in reconnecting with their inner peace, clarity, and true essence.At Incredible Souls, Reshu Gupta creates a nurturing space for self-discovery, emotional healing, and spiritual growth, reminding others that the journey of healing is ultimately a return to the wisdom, light, and strength already present within the soul.',
+    image: '/Reshu-nre.jpeg',
     phone: '+91 7709008011',
     email: 'incrediblesouls@gmail.com',
   },
 
   {
     name: 'Jai Bhagwan Jangra',
-    designation: 'Co-Founder & Director',
-    role: 'Spiritual Seeker | Co-Founder | Community Outreach & Social Wellness',
-    bio: 'Mr. Jai Bhagwan Jangra, Co-Founder of Incredible Souls, brings a life rooted in devotion, discipline, humility, and faith. His spiritual journey reflects simplicity, service, and the belief that wisdom is lived through compassion and meaningful actions. At Incredible Souls, he leads community outreach and social wellness initiatives with a vision to nurture conscious, supportive, and compassionate communities through faith, service, and spiritual connection.',
+    designation: 'Director',
+    role: 'Spiritual Seeker | Director | Community Outreach & Social Wellness',
+    bio: 'Mr. Jai Bhagwan Jangra, Director of Incredible Souls, brings a life rooted in devotion, discipline, humility, and faith. His spiritual journey reflects simplicity, service, and the belief that wisdom is lived through compassion and meaningful actions. At Incredible Souls, he leads community outreach and social wellness initiatives with a vision to nurture conscious, supportive, and compassionate communities through faith, service, and spiritual connection.',
     image: '/jb.jpeg',
     phone: '+91 9540295402',
     email: 'incrediblesouls@gmail.com',
@@ -113,7 +113,7 @@ export default function AboutPage() {
             <RevealWrapper dir="left" className="sticky top-28 flex justify-center">
               <div className="relative w-[320px] md:w-[380px] aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(107,45,139,0.15)]">
                 <Image
-                  src="/Reshu-nre.jpeg"
+                  src="/reshu.JPG"
                   alt="Incredible Souls healing sanctuary"
                   fill
                   className="object-cover"

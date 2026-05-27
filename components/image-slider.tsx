@@ -31,10 +31,10 @@ export default function ImageSlider({ images }: ImageSliderProps) {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-4xl md:text-5xl font-sans font-bold text-[#2D1B3D] mb-3">
             Healing in Action
           </h2>
@@ -104,7 +104,7 @@ export default function ImageSlider({ images }: ImageSliderProps) {
         </div>
 
         {/* Indicators */}
-        <div className="flex justify-center gap-3 mt-12">
+        <div className="flex justify-center gap-3 mt-8">
           {images.map((_, idx) => (
             <button
               key={idx}

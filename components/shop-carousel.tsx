@@ -52,7 +52,7 @@ const products: Product[] = [
     price: 3500,
     rating: 5.0,
     reviews: 67,
-    image: '/images/product-lama-fera.jpg',
+    image: '/lama-fera.jpeg',
   },
   {
     id: 5,

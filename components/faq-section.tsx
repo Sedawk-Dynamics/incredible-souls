@@ -189,10 +189,10 @@ export default function FAQSection({
   const displayedFAQs = showAll ? faqs : faqs.slice(0, initialCount)
 
   return (
-    <section className="py-20 bg-[#F5F1ED]">
+    <section className="py-12 bg-[#F5F1ED]">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-5xl md:text-6xl font-serif text-[#2D1B3D]">
             FAQs
           </h2>
