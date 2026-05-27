@@ -95,7 +95,7 @@ export function HealingModalitiesList1({
         {/* CTA */}
         <div className="flex items-center gap-4 pt-2">
           <button className="inline-flex items-center justify-center gap-2 px-7 py-2.5 bg-[#9B59B6] text-white font-body font-semibold text-sm rounded-full hover:bg-[#6B2D8B] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(155,89,182,0.35)]">
-            Register Now
+            Learn More
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
