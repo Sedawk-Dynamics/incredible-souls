@@ -272,6 +272,7 @@ export default function HomePage() {
   language: "Online",
   price: "₹5,550",
   startsIn: "5 Days",
+  
 },
 {
   id: "3",
