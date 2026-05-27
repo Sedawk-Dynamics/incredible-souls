@@ -73,7 +73,7 @@ export default function Footer() {
                 },
                 {
                   icon: Youtube,
-                  href: 'https://www.youtube.com',
+                  href: 'https://www.youtube.com/@byIncredibleSouls',
                 },
               ].map((social, i) => {
                 const Icon = social.icon

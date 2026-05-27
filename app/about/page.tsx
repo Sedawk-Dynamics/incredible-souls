@@ -60,9 +60,9 @@ const teamMembers = [
 
   {
     name: 'Jai Bhagwan Jangra',
-    designation: 'Director',
-    role: 'Spiritual Seeker | Director | Community Outreach & Social Wellness',
-    bio: 'Mr. Jai Bhagwan Jangra, Director of Incredible Souls, brings a life rooted in devotion, discipline, humility, and faith. His spiritual journey reflects simplicity, service, and the belief that wisdom is lived through compassion and meaningful actions. At Incredible Souls, he leads community outreach and social wellness initiatives with a vision to nurture conscious, supportive, and compassionate communities through faith, service, and spiritual connection.',
+    designation: 'Director & Spiritual Seeker',
+    role: 'Community Outreach & Social Wellness Coach',
+    bio: 'Mr. Jai Bhagwan Jangra, Co-Founder of Incredible Souls, brings a life rooted in devotion, discipline, humility, and deep faith. His spiritual path reflects simplicity, service, and the belief that true wisdom is lived through everyday actions, relationships and compassion.At Incredible Souls, he leads community outreach and social wellness initiatives with a vision to build conscious, supportive and compassionate communities.His journey reminds us that spiritual strength lies in faith, service and surrender to the divine path.',
     image: '/jb.jpeg',
     phone: '+91 9540295402',
     email: 'incrediblesouls@gmail.com',
@@ -72,7 +72,7 @@ const teamMembers = [
     name: 'VidhyA',
     designation: 'Spiritual Mentor',
     role: 'Healer | Spiritual Mentor',
-    bio: 'VidhyA is a deeply compassionate spiritual mentor whose path is rooted in faith, inner strength, and soulful transformation. From an early age, she embraced devotion, self-discovery, and healing, allowing life experiences to deepen her spiritual wisdom. At Incredible Souls, she offers a nurturing and transformational presence, inspiring individuals to grow through faith, acceptance, inner conviction, and the courage to move towards their highest light.',
+    bio: 'VidhyA is a deeply compassionate spiritual mentor whose journey is rooted in faith, inner strength, and a profound calling to understand life beyond the visible. From an early age, she has walked the path of self-discovery, devotion, and inner transformation, allowing life’s experiences to deepen her connection with soul wisdom.At Incredible Souls, Vidhya carries a powerful and transformational presence. She reminds us that true growth often unfolds quietly — through faith, acceptance, inner conviction and the grace to keep moving towards one’s own light.',
     image: '/vl.jpeg',
     phone: '+91 9699638011',
     email: 'incrediblesouls@gmail.com',

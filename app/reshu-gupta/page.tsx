@@ -58,7 +58,7 @@ export default function ReshuGuptaPage() {
                   Spiritual Coach · Soul Alchemist
                 </p>
                 <p className="font-body text-base leading-relaxed text-[#6B5B7B] mb-6">
-                  Reshu Gupta is a visionary spiritual healer and intuitive mentor who guides individuals through deep transformation and awakening. Her mission is to create a space where every soul feels safe to return to its essence.
+                 With warmth, compassion, and deep intuitive understanding, Reshu Gupta gently guides individuals on a journey of inner healing, self-discovery, and spiritual awakening. Her work offers a nurturing and supportive space where one can slow down, reconnect within, and return to a deeper sense of peace, clarity, and soul alignment. Through meditation, energy healing, spiritual guidance, and transformational practices, she lovingly invites you to pause from the noise of everyday life, reconnect with your inner self, and experience a deeper sense of peace, healing, and clarity. Each session is offered as a gentle and sacred space where you can feel supported, heard, and guided on your journey back to balance, self-awareness, and inner light.
                 </p>
 
                 {/* Contact */}
