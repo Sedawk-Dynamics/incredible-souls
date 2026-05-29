@@ -106,9 +106,10 @@ export default function AboutPage() {
             </RevealWrapper>
           </div>
         </section>
+
 {/* ── ABOUT DETAIL ─────────────────────────────────────── */}
 <section className="py-20 bg-[#FFF9F0]">
-  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+  <div className="max-w-5xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-10 items-start">
     
     {/* Left Image */}
     <RevealWrapper
@@ -155,61 +156,7 @@ export default function AboutPage() {
           greater awareness, purpose, and trust in your own light — creating
           harmony within yourself, with others, and with the world around you.
         </p>
-      </div>
-
-      {/* Mission */}
-      {/*
-      <div className="p-6 rounded-2xl bg-[#E9DFF0]/40 border border-[#E9DFF0]">
-        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">
-          Our Mission
-        </h3>
-        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-          To nurture holistic transformation by supporting communities across the
-          essential pillars of life — food, employment, education, health and
-          environment. We strive to create conscious, self-sustaining ecosystems
-          where well-being, livelihood and inner growth coexist in harmony.
-        </p>
-      </div>
-      */}
-
-      {/* Vision */}
-      {/*
-      <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#E9DFF0]">
-        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-3">
-          Our Vision
-        </h3>
-        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-          A world where every soul lives in alignment with its highest truth —
-          free from fear, separation and karmic entanglements. We envision healing
-          as a sacred return to wholeness, where individuals rise in love,
-          embody their truth and radiate peace into their families, communities
-          and the world.
-        </p>
-      </div>
-      */}
-
-      {/* Why Choose */}
-      {/*
-      <div>
-        <h3 className="font-sans text-xl font-medium text-[#2D1B3D] mb-4">
-          Why Choose Incredible Souls?
-        </h3>
-
-        <p className="font-body text-sm leading-relaxed text-[#6B5B7B] mb-4">
-          At Incredible Souls, we believe that every soul is incredible — a
-          unique light of divine purpose and inner wisdom, waiting to awaken.
-        </p>
-
-        <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">
-          Growth Sequence — The Journey of Transformation at Incredible Souls.
-          At Incredible Souls, growth is seen as a gentle unfolding of the self.
-          Every seeker begins from a different place, yet the journey often
-          moves through a beautiful sequence of awareness, healing, alignment
-          and expansion. Our role is to support this inner movement with
-          compassion and spiritual guidance.
-        </p>
-      </div>
-      */}
+      </div>     
     </RevealWrapper>
   </div>
 </section>
@@ -217,7 +164,7 @@ export default function AboutPage() {
 
 
         {/* ── GROWTH SEQUENCE ──────────────────────────────────────────── */}
-        <section className="py-24 bg-[#FFF9F0] overflow-hidden">
+        <section className="pt-24 pb-12 bg-[#FFF9F0] overflow-hidden">
           <div className="max-w-5xl mx-auto px-6 lg:px-12">
             {/* Header */}
             <div className="text-center mb-16">
@@ -338,12 +285,11 @@ export default function AboutPage() {
         </section>
 
 
-        {/* ── OUR PRINCIPLES ──────────────────────────────────────────── */}
 
 
 
         {/* ── TEAM ─────────────────────────────────────────────── */}
-        <section className="py-24 bg-[#FFF9F0]">
+        <section className="pt-12 pb-24 bg-[#FFF9F0]">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <RevealWrapper className="text-center mb-16">
               <div className="ornament-divider justify-center mb-4">

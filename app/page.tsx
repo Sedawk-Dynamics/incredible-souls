@@ -279,7 +279,7 @@ export default function HomePage() {
           title: "Relationships & Inner Child Healing",
           description:
             "Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.",
-          image: "/images/inner-child-healing.jpg",
+          image: "/Relationships & Inner Child Healing 01.png",
           date: "29th June – 3rd July",
           language: "Online",
           price: "₹15,000",

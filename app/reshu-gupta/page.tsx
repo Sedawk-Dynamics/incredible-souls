@@ -73,7 +73,7 @@ export default function ReshuGuptaPage() {
                     href="mailto:incrediblesouls@gmail.com"
                     className="block font-body text-sm text-[#9B8BAB] hover:text-[#6B2D8B] transition-colors break-all"
                   >
-                    incrediblesouls@gmail.com
+                  byincrediblesouls@gmail.com
                   </a>
                 </div>
               </div>
