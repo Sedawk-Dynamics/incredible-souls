@@ -7,7 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 /* ---------------------------
-   Courses Dropdown
+   Academy Dropdown
 ---------------------------- */
 const coursesDropdown = [
   {
@@ -36,7 +36,8 @@ const coursesDropdown = [
   },
   {
     label: 'Relationships & Inner Child Healing',
-    href: 'https://incredible.sedawk.cloud/relationships-inner-child-healing/',
+    href:
+      'https://incredible.sedawk.cloud/relationships-inner-child-healing/',
   },
   {
     label: 'Akashik Records',
@@ -58,11 +59,13 @@ const healingDropdown = [
   },
   {
     label: 'Bandhan Moksha Kriya',
-    href: 'https://incredible.sedawk.cloud/bandhan-moksha-kriya/',
+    href:
+      'https://incredible.sedawk.cloud/bandhan-moksha-kriya/',
   },
   {
     label: 'Aura Clearance & Chakras Aligning',
-    href: 'https://incredible.sedawk.cloud/aura-clearance-chakras-aligning/',
+    href:
+      'https://incredible.sedawk.cloud/aura-clearance-chakras-aligning/',
   },
   {
     label: 'Akashik Records Reading',
@@ -71,35 +74,70 @@ const healingDropdown = [
 ]
 
 /* ---------------------------
+   Mystica Dropdown
+---------------------------- */
+const mysticaDropdown = [
+  {
+    label: 'Trika',
+    href: 'https://incredible.sedawk.cloud/trika/',
+  },
+  {
+    label: 'Vastu',
+    href: 'https://incredible.sedawk.cloud/vastu/',
+  },
+  {
+    label: 'Sound Healing',
+    href:
+      'https://incredible.sedawk.cloud/sound-healing/',
+  },
+]
+
+/* ---------------------------
    Navigation Links
 ---------------------------- */
 const navLinks = [
-  // { href: '/', label: 'Home' },
   { href: '/about', label: 'Our Approach' },
-  // { href: '/feehe', label: 'FEEHE' },
+
   {
     href: null,
     label: 'Academy',
-    hasDropdown: false,
+    hasDropdown: true,
     type: 'courses',
-    disabled: true,
   },
 
   {
     href: null,
     label: 'Healings',
-    hasDropdown: false,
+    hasDropdown: true,
     type: 'healing',
-    disabled: true,
   },
-  { href: null, label: 'Mystica', disabled: true },
-  { href: null, label: 'Events', disabled: true },
-  { href: null, label: 'Shop', disabled: true },
+
+  {
+    href: null,
+    label: 'Mystica',
+    hasDropdown: true,
+    type: 'mystica',
+  },
+
+  {
+    href:
+      'https://incredible.sedawk.cloud/?post_type=tribe_events&eventDisplay=month',
+    label: 'Events',
+    external: true,
+  },
+
+  {
+    href: 'https://incredible.sedawk.cloud/shop/',
+    label: 'Shop',
+    external: true,
+  },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [openMobileDropdown, setOpenMobileDropdown] =
+    useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,8 +146,25 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () =>
+      window.removeEventListener(
+        'scroll',
+        handleScroll
+      )
   }, [])
+
+  const getDropdownItems = (type: string) => {
+    switch (type) {
+      case 'courses':
+        return coursesDropdown
+      case 'healing':
+        return healingDropdown
+      case 'mystica':
+        return mysticaDropdown
+      default:
+        return []
+    }
+  }
 
   return (
     <header
@@ -121,8 +176,6 @@ export default function Navbar() {
       )}
     >
       <nav className="flex items-center justify-between px-6 lg:px-12 py-4">
-
-        {/* Logo */}
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <div className="relative w-[200px] h-[60px] md:w-[240px] md:h-[70px] lg:w-[280px] lg:h-[80px]">
@@ -140,19 +193,20 @@ export default function Navbar() {
         <ul className="hidden lg:flex items-center gap-2">
           {navLinks.map((link) =>
             link.hasDropdown ? (
-              <li key={link.label} className="relative group">
-
-                {/* Dropdown Trigger */}
+              <li
+                key={link.label}
+                className="relative group"
+              >
+                {/* Dropdown Button */}
                 <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#2D1B3D] hover:text-[#6B2D8B] transition">
                   {link.label}
                   <ChevronDown className="w-4 h-4" />
                 </button>
 
                 {/* Dropdown Menu */}
-                <div className="absolute top-full left-0 w-[320px] bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  {(link.type === 'courses'
-                    ? coursesDropdown
-                    : healingDropdown
+                <div className="absolute top-full left-0 min-w-[280px] bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  {getDropdownItems(
+                    link.type || ''
                   ).map((item, index) => (
                     <a
                       key={index}
@@ -168,13 +222,18 @@ export default function Navbar() {
               </li>
             ) : (
               <li key={link.label}>
-                {link.disabled ? (
-                  <span className="px-4 py-2 text-sm font-medium text-[#2D1B3D] hover:text-[#6B2D8B] transition cursor-not-allowed">
+                {link.external ? (
+                  <a
+                    href={link.href || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-medium text-[#2D1B3D] hover:text-[#6B2D8B] transition"
+                  >
                     {link.label}
-                  </span>
+                  </a>
                 ) : (
                   <Link
-                    href={link.href}
+                    href={link.href || '#'}
                     className="px-4 py-2 text-sm font-medium text-[#2D1B3D] hover:text-[#6B2D8B] transition"
                   >
                     {link.label}
@@ -220,49 +279,80 @@ export default function Navbar() {
             <li key={link.label}>
               {link.hasDropdown ? (
                 <>
-                  <p className="font-medium text-[#2D1B3D] mb-2">
+                  <button
+                    onClick={() =>
+                      setOpenMobileDropdown(
+                        openMobileDropdown ===
+                          link.label
+                          ? null
+                          : link.label
+                      )
+                    }
+                    className="flex items-center justify-between w-full font-medium text-[#2D1B3D]"
+                  >
                     {link.label}
-                  </p>
 
-                  <div className="pl-4 space-y-2">
-                    {(link.type === 'courses'
-                      ? coursesDropdown
-                      : healingDropdown
-                    ).map((item, index) => (
-                      <a
-                        key={index}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block text-sm text-gray-600 hover:text-[#6B2D8B]"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <>
-                  {link.disabled ? (
-                    <span className="block text-[#D4BBCE] cursor-not-allowed">
-                      {link.label}
-                    </span>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="block text-[#2D1B3D] hover:text-[#6B2D8B] transition"
-                    >
-                      {link.label}
-                    </Link>
+                    <ChevronDown
+                      className={cn(
+                        'w-4 h-4 transition-transform',
+                        openMobileDropdown ===
+                          link.label &&
+                          'rotate-180'
+                      )}
+                    />
+                  </button>
+
+                  {openMobileDropdown ===
+                    link.label && (
+                    <div className="pl-4 mt-3 space-y-3 border-l-2 border-[#E7D8EF]">
+                      {getDropdownItems(
+                        link.type || ''
+                      ).map((item, index) => (
+                        <a
+                          key={index}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-sm text-[#1B2B45] hover:text-[#6B2D8B] transition"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </>
+              ) : link.external ? (
+                <a
+                  href={link.href || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    setIsOpen(false)
+                  }
+                  className="block text-[#2D1B3D] hover:text-[#6B2D8B] transition"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  href={link.href || '#'}
+                  onClick={() =>
+                    setIsOpen(false)
+                  }
+                  className="block text-[#2D1B3D] hover:text-[#6B2D8B] transition"
+                >
+                  {link.label}
+                </Link>
               )}
             </li>
           ))}
 
+          {/* Mobile CTA */}
           <Link
             href="/contact"
+            onClick={() =>
+              setIsOpen(false)
+            }
             className="block text-center bg-[#6B2D8B] text-white py-3 rounded-full font-medium"
           >
             Book a Session

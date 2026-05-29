@@ -55,7 +55,7 @@ const teamMembers = [
     bio: 'Reshu Gupta’s journey is rooted in inner awakening, spiritual exploration, and a deep calling towards healing and soul transformation. Through meditation, sacred experiences, and intuitive understanding, she has developed a compassionate and grounded approach that gently supports individuals in reconnecting with their inner peace, clarity, and true essence.At Incredible Souls, Reshu Gupta creates a nurturing space for self-discovery, emotional healing, and spiritual growth, reminding others that the journey of healing is ultimately a return to the wisdom, light, and strength already present within the soul.',
     image: '/Reshu-nre.jpeg',
     phone: '+91 7709008011',
-    email: 'incrediblesouls@gmail.com',
+    email: 'byincrediblesouls@gmail.com',
   },
 
   {
@@ -65,7 +65,7 @@ const teamMembers = [
     bio: 'Mr. Jai Bhagwan Jangra, Co-Founder of Incredible Souls, brings a life rooted in devotion, discipline, humility, and deep faith. His spiritual path reflects simplicity, service, and the belief that true wisdom is lived through everyday actions, relationships and compassion.At Incredible Souls, he leads community outreach and social wellness initiatives with a vision to build conscious, supportive and compassionate communities.His journey reminds us that spiritual strength lies in faith, service and surrender to the divine path.',
     image: '/jb.jpeg',
     phone: '+91 9540295402',
-    email: 'incrediblesouls@gmail.com',
+    email: 'byincrediblesouls@gmail.com',
   },
 
   {
@@ -75,7 +75,7 @@ const teamMembers = [
     bio: 'VidhyA is a deeply compassionate spiritual mentor whose journey is rooted in faith, inner strength, and a profound calling to understand life beyond the visible. From an early age, she has walked the path of self-discovery, devotion, and inner transformation, allowing life’s experiences to deepen her connection with soul wisdom.At Incredible Souls, Vidhya carries a powerful and transformational presence. She reminds us that true growth often unfolds quietly — through faith, acceptance, inner conviction and the grace to keep moving towards one’s own light.',
     image: '/vl.jpeg',
     phone: '+91 9699638011',
-    email: 'incrediblesouls@gmail.com',
+    email: 'byincrediblesouls@gmail.com',
   },
 ]
 
