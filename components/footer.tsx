@@ -16,15 +16,15 @@ import {
 const quickLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'Our Approach' },
-  { href: '/courses', label: 'Courses' },
+  // { href: '/courses', label: 'Courses' },
   { href: '/contact', label: 'Contact' },
 ]
 
 const healingLinks = [
-  { href: '/healing/trika', label: 'Trika (Tantra, Mantra & Yantra)' },
-  { href: '/healing/vastu', label: 'Vastu' },
-  { href: '/healing/sound-healing', label: 'Sound Healing' },
-  { href: '/healing', label: 'All Healing Services' },
+  { href: 'https://incredible.sedawk.cloud/trika/', label: 'Trika (Tantra, Mantra & Yantra)' },
+  { href: 'https://incredible.sedawk.cloud/vastu/', label: 'Vastu' },
+  { href: 'https://incredible.sedawk.cloud/sound-healing/', label: 'Sound Healing' },
+  { href: 'https://incredible.sedawk.cloud/product/healing-powders/', label: 'All Healing Services' },
 ]
 
 export default function Footer() {
@@ -116,7 +116,7 @@ export default function Footer() {
           {/* Healing Services */}
           <div>
             <h3 className="font-sans text-base font-semibold text-[#2D1B3D] mb-5">
-              Healing Services
+              Mystica Services
             </h3>
 
             <ul className="space-y-3">
