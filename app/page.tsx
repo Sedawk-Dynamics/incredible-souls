@@ -90,6 +90,55 @@ const testimonials = [
   },
 ]
 
+// Featured workshops on the home page. `startDate` (ISO, next batch) makes the list
+// sortable so upcoming courses stay on top and past ones sink automatically.
+const homeWorkshops = [
+  {
+    id: '1',
+    title: 'Standard Lama Healing',
+    description:
+      'A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.',
+    image: '/images/standard-lama-healing.jpg',
+    date: '8th June – 9th June',
+    startDate: '2026-06-08',
+    language: 'Online',
+    price: '₹5,550',
+  },
+  {
+    id: '2',
+    title: 'Advanced Lama Healing',
+    description:
+      'Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.',
+    image: '/lama-fera-advanced-healing .jpeg',
+    date: '10th June – 11th June',
+    startDate: '2026-06-10',
+    language: 'Online',
+    price: '₹5,550',
+  },
+  {
+    id: '3',
+    title: 'Relationships & Inner Child Healing',
+    description:
+      'Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.',
+    image: '/Relationships & Inner Child Healing 01.png',
+    date: '29th June – 3rd July',
+    startDate: '2026-06-29',
+    language: 'Online',
+    price: '₹15,000',
+  },
+  {
+    id: '4',
+    title: 'Past Life Regressions Therapy Course',
+    description:
+      'An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.',
+    image: '/images/past-life-regression.jpg',
+    date: '31st July – 7th August',
+    startDate: '2026-07-31',
+    language: 'Online',
+    price: '₹21,600',
+  },
+]
+
 function RevealWrapper({ children, className, dir = 'up' }: { children: React.ReactNode, className?: string, dir?: 'up' | 'left' | 'right' }) {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -127,7 +176,6 @@ function ParticleOrb({ size, x, y, delay }: { size: number, x: string, y: string
 export default function HomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const heroRef = useRef<HTMLElement>(null)
-  const [activeCourse, setActiveCourse] = useState<string | null>(null);
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!heroRef.current) return
@@ -140,6 +188,19 @@ export default function HomePage() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
+
+  // Upcoming courses first (soonest → latest), past workshops after (most recent first).
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const isUpcoming = (w: (typeof homeWorkshops)[number]) => new Date(w.startDate) >= today
+  const sortedWorkshops = [...homeWorkshops].sort((a, b) => {
+    const da = new Date(a.startDate).getTime()
+    const db = new Date(b.startDate).getTime()
+    const aUp = isUpcoming(a)
+    const bUp = isUpcoming(b)
+    if (aUp !== bUp) return aUp ? -1 : 1
+    return aUp ? da - db : db - da
+  })
 
   return (
     <>
@@ -251,52 +312,7 @@ export default function HomePage() {
 
     {/* Courses */}
     <div className="space-y-6">
-      {[
-        {
-          id: "1",
-          title: "Standard Lama Healing",
-          description:
-            "A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.",
-          image: "/images/standard-lama-healing.jpg",
-          date: "8th June – 9th June",
-          language: "Online",
-          price: "₹5,550",
-          startsIn: "3 Days",
-        },
-        {
-          id: "2",
-          title: "Advanced Lama Healing",
-          description:
-            "Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.",
-          image: "/lama-fera-advanced-healing .jpeg",
-          date: "10th June – 11th June",
-          language: "Online",
-          price: "₹5,550",
-          startsIn: "5 Days",
-        },
-        {
-          id: "3",
-          title: "Relationships & Inner Child Healing",
-          description:
-            "Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.",
-          image: "/Relationships & Inner Child Healing 01.png",
-          date: "29th June – 3rd July",
-          language: "Online",
-          price: "₹15,000",
-          startsIn: "10 Days",
-        },
-        {
-          id: "4",
-          title: "Past Life Regressions Therapy Course",
-          description:
-            "An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.",
-          image: "/images/past-life-regression.jpg",
-          date: "31st July – 7th August",
-          language: "Online",
-          price: "₹21,600",
-          startsIn: "15 Days",
-        },
-      ].map((workshop) => (
+      {sortedWorkshops.map((workshop) => (
         <div
           key={workshop.id}
           className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
@@ -316,7 +332,19 @@ export default function HomePage() {
 
             {/* Right Content */}
             <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
-              
+
+              {/* Status badge */}
+              <span
+                className={`inline-flex items-center gap-1.5 w-fit text-xs font-semibold px-3 py-1 rounded-full mb-3 ${
+                  isUpcoming(workshop)
+                    ? 'bg-[#0B8C87]/10 text-[#0B8C87]'
+                    : 'bg-[#9B8BAB]/15 text-[#9B8BAB]'
+                }`}
+              >
+                <span className={`w-1.5 h-1.5 rounded-full ${isUpcoming(workshop) ? 'bg-[#0B8C87]' : 'bg-[#9B8BAB]'}`} />
+                {isUpcoming(workshop) ? 'Upcoming' : 'Completed'}
+              </span>
+
               {/* Title */}
               <h3 className="text-2xl lg:text-[38px] font-semibold text-[#2D1B3D] mb-4">
                 {workshop.title}
@@ -346,15 +374,10 @@ export default function HomePage() {
                   </span>
                 </div>
 
-                {/* Register Button */}
-                <div
-                  onClick={() => setActiveCourse(workshop.id)}
-                  className={`flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 w-fit cursor-pointer
-                  ${
-                    activeCourse === workshop.id
-                      ? "bg-[#066b67] text-white"
-                      : "bg-[#0B8C87] text-white"
-                  }`}
+                {/* Register Button → Courses page */}
+                <Link
+                  href="/courses"
+                  className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 w-fit cursor-pointer bg-[#0B8C87] text-white hover:bg-[#066b67]"
                 >
                   <span className="font-semibold text-lg lg:text-xl">
                     Register Now
@@ -367,7 +390,7 @@ export default function HomePage() {
                   <span className="font-bold text-lg lg:text-xl">
                     {workshop.price}
                   </span>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
