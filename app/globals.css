@@ -112,6 +112,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent horizontal page scroll caused by reveal (translateX) animations on mobile */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* Custom animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }

@@ -108,13 +108,13 @@ export default function AboutPage() {
         </section>
 
 {/* ── ABOUT DETAIL ─────────────────────────────────────── */}
-<section className="py-20 bg-[#FFF9F0]">
+<section className="py-20 bg-[#FFF9F0] overflow-hidden">
   <div className="max-w-5xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-10 items-start">
-    
+
     {/* Left Image */}
     <RevealWrapper
       dir="left"
-      className="sticky top-28 flex justify-center lg:justify-start"
+      className="lg:sticky lg:top-28 flex justify-center lg:justify-start"
     >
       <div className="relative w-[300px] md:w-[360px] h-[420px] lg:h-[460px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(107,45,139,0.12)]">
         <Image
