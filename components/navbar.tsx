@@ -12,36 +12,36 @@ import { cn } from '@/lib/utils'
 const coursesDropdown = [
   {
     label: 'Lama Fera',
-    href: 'https://incredible.sedawk.cloud/lama-fera/',
+    href: 'https://academy.incrediblesouls.co.in/',
   },
   {
     label: 'Money & Abundance',
-    href: 'https://incredible.sedawk.cloud/money-abundance/',
+    href: 'https://academy.incrediblesouls.co.in/money-abundance/',
   },
   {
     label: 'Psychic Surgery & Psychic Being',
-    href: 'https://incredible.sedawk.cloud/psychic-surgery-psychic-being/',
+    href: 'https://academy.incrediblesouls.co.in/psychic-surgery-psychic-being/',
   },
   {
     label: 'Karmic Clearance & Karuna Reiki',
-    href: 'https://incredible.sedawk.cloud/karmic-clearance-karuna-reiki/',
+    href: 'https://academy.incrediblesouls.co.in/karmic-clearance-karuna-reiki/',
   },
   {
     label: 'Harmony & Zero State',
-    href: 'https://incredible.sedawk.cloud/harmony-zero-state/',
+    href: 'https://academy.incrediblesouls.co.in/harmony-zero-state/',
   },
   {
     label: 'Past Life Regression Therapy',
-    href: 'https://incredible.sedawk.cloud/past-life-regression-therapy/',
+    href: 'https://academy.incrediblesouls.co.in/past-life-regression-therapy/',
   },
   {
     label: 'Relationships & Inner Child Healing',
     href:
-      'https://incredible.sedawk.cloud/relationships-inner-child-healing/',
+      'https://academy.incrediblesouls.co.in/relationships-inner-child-healing/',
   },
   {
     label: 'Akashik Records',
-    href: 'https://incredible.sedawk.cloud/akashik-records/',
+    href: 'https://academy.incrediblesouls.co.in/akashik-records/',
   },
 ]
 
@@ -51,25 +51,25 @@ const coursesDropdown = [
 const healingDropdown = [
   {
     label: 'Past Life Regression',
-    href: 'https://incredible.sedawk.cloud/past-life-regression/',
+    href: 'https://academy.incrediblesouls.co.in/past-life-regression/',
   },
   {
     label: 'Distance Healing',
-    href: 'https://incredible.sedawk.cloud/distance-healing/',
+    href: 'https://academy.incrediblesouls.co.in/distance-healing/',
   },
   {
     label: 'Bandhan Moksha Kriya',
     href:
-      'https://incredible.sedawk.cloud/bandhan-moksha-kriya/',
+      'https://academy.incrediblesouls.co.in/bandhan-moksha-kriya/',
   },
   {
     label: 'Aura Clearance & Chakras Aligning',
     href:
-      'https://incredible.sedawk.cloud/aura-clearance-chakras-aligning/',
+      'https://academy.incrediblesouls.co.in/aura-clearance-chakras-aligning/',
   },
   {
     label: 'Akashik Records Reading',
-    href: 'https://incredible.sedawk.cloud/akashik-records/',
+    href: 'https://academy.incrediblesouls.co.in/akashik-records/',
   },
 ]
 
@@ -79,16 +79,16 @@ const healingDropdown = [
 const mysticaDropdown = [
   {
     label: 'Trika',
-    href: 'https://incredible.sedawk.cloud/trika/',
+    href: 'https://academy.incrediblesouls.co.in/trika/',
   },
   {
     label: 'Vastu',
-    href: 'https://incredible.sedawk.cloud/vastu/',
+    href: 'https://academy.incrediblesouls.co.in/vastu/',
   },
   {
     label: 'Sound Healing',
     href:
-      'https://incredible.sedawk.cloud/sound-healing/',
+      'https://academy.incrediblesouls.co.in/sound-healing/',
   },
 ]
 
@@ -121,13 +121,13 @@ const navLinks = [
 
   {
     href:
-      'https://incredible.sedawk.cloud/?post_type=tribe_events&eventDisplay=month',
+      'https://academy.incrediblesouls.co.in/?post_type=tribe_events&eventDisplay=month',
     label: 'Events',
     external: true,
   },
 
   {
-    href: 'https://incredible.sedawk.cloud/shop/',
+    href: 'https://academy.incrediblesouls.co.in/shop/',
     label: 'Shop',
     external: true,
   },

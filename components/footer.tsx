@@ -21,10 +21,10 @@ const quickLinks = [
 ]
 
 const healingLinks = [
-  { href: 'https://incredible.sedawk.cloud/trika/', label: 'Trika (Tantra, Mantra & Yantra)' },
-  { href: 'https://incredible.sedawk.cloud/vastu/', label: 'Vastu' },
-  { href: 'https://incredible.sedawk.cloud/sound-healing/', label: 'Sound Healing' },
-  // { href: 'https://incredible.sedawk.cloud/product/healing-powders/', label: 'All Healing Services' },
+  { href: 'https://academy.incrediblesouls.co.in/trika/', label: 'Trika (Tantra, Mantra & Yantra)' },
+  { href: 'https://academy.incrediblesouls.co.in/vastu/', label: 'Vastu' },
+  { href: 'https://academy.incrediblesouls.co.in/sound-healing/', label: 'Sound Healing' },
+  // { href: 'https://academy.incrediblesouls.co.in/product/healing-powders/', label: 'All Healing Services' },
 ]
 
 export default function Footer() {
