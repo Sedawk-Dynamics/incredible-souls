@@ -91,8 +91,8 @@ const testimonials = [
   },
 ]
 
-// Featured workshops on the home page. `upcomingBatches` (ISO dates) drives automatic
-// month grouping — the nearest future batch decides each card's month/position.
+// Featured workshops on the home page. Each batch carries its ISO date (for grouping)
+// AND its display label, so the card always shows the NEAREST upcoming batch's date.
 const homeWorkshops = [
   {
     id: '1',
@@ -100,8 +100,11 @@ const homeWorkshops = [
     description:
       'A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.',
     image: '/images/standard-lama-healing.jpg',
-    date: '8th June – 9th June',
-    upcomingBatches: ['2026-06-08', '2026-09-07', '2026-12-07'],
+    batches: [
+      { iso: '2026-06-08', label: '8th – 9th June' },
+      { iso: '2026-09-07', label: '7th – 8th Sept' },
+      { iso: '2026-12-07', label: '7th – 8th Dec' },
+    ],
     language: 'Online',
     price: '₹5,550',
   },
@@ -111,8 +114,11 @@ const homeWorkshops = [
     description:
       'Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.',
     image: '/lama-fera-advanced-healing .jpeg',
-    date: '10th June – 11th June',
-    upcomingBatches: ['2026-06-10', '2026-09-09', '2026-12-09'],
+    batches: [
+      { iso: '2026-06-10', label: '10th – 11th June' },
+      { iso: '2026-09-09', label: '9th – 10th Sept' },
+      { iso: '2026-12-09', label: '9th – 10th Dec' },
+    ],
     language: 'Online',
     price: '₹5,550',
   },
@@ -122,8 +128,10 @@ const homeWorkshops = [
     description:
       'Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.',
     image: '/Relationships & Inner Child Healing 01.png',
-    date: '29th June – 3rd July',
-    upcomingBatches: ['2026-06-29', '2026-12-14'],
+    batches: [
+      { iso: '2026-06-29', label: '29th June – 3rd July' },
+      { iso: '2026-12-14', label: '14th – 18th Dec' },
+    ],
     language: 'Online',
     price: '₹15,000',
   },
@@ -133,14 +141,29 @@ const homeWorkshops = [
     description:
       'An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.',
     image: '/images/past-life-regression.jpg',
-    date: '31st July – 7th August',
-    upcomingBatches: ['2026-07-31', '2026-10-30'],
+    batches: [
+      { iso: '2026-07-31', label: '31st July – 7th Aug' },
+      { iso: '2026-10-30', label: '30th Oct – 6th Nov' },
+    ],
     language: 'Online',
     price: '₹21,600',
   },
 ]
 
 type HomeWorkshop = (typeof homeWorkshops)[number]
+
+// Date shown on a card = the nearest upcoming batch's label; if all have passed,
+// fall back to the most recent past batch.
+function displayBatchLabel(workshop: HomeWorkshop): string {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const upcoming = workshop.batches
+    .filter((b) => new Date(b.iso).getTime() >= today.getTime())
+    .sort((a, b) => new Date(a.iso).getTime() - new Date(b.iso).getTime())
+  if (upcoming.length) return upcoming[0].label
+  const past = [...workshop.batches].sort((a, b) => new Date(b.iso).getTime() - new Date(a.iso).getTime())
+  return past[0]?.label ?? ''
+}
 
 // Home workshop card — UI unchanged; `completed` only flips the status badge.
 function HomeWorkshopCard({ workshop, completed }: { workshop: HomeWorkshop; completed: boolean }) {
@@ -174,10 +197,10 @@ function HomeWorkshopCard({ workshop, completed }: { workshop: HomeWorkshop; com
 
           {/* Info Pills + Register Button */}
           <div className="flex flex-wrap items-center gap-4 mb-7">
-            {/* Date */}
+            {/* Date — nearest upcoming batch */}
             <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
               <span>📅</span>
-              <span className="text-sm text-[#4A4453]">{workshop.date}</span>
+              <span className="text-sm text-[#4A4453]">{displayBatchLabel(workshop)}</span>
             </div>
 
             {/* Language */}
@@ -257,7 +280,7 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
   const workshopSchedule = useMemo(
-    () => groupBySchedule(homeWorkshops, (w) => w.upcomingBatches),
+    () => groupBySchedule(homeWorkshops, (w) => w.batches.map((b) => b.iso)),
     [mounted]
   )
 
