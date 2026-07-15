@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { ArrowRight, Clock, Monitor, Users, CalendarClock } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { COURSES, priceLabel } from '@/lib/courses'
+import { COURSES, priceLabel, getCourseBatches, isRecurringCourse, type Course } from '@/lib/courses'
+import { groupBySchedule } from '@/lib/course-schedule'
 
 function RevealWrapper({ children, className, dir = 'up' }: { children: React.ReactNode, className?: string, dir?: 'up' | 'left' | 'right' }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -24,8 +25,105 @@ function RevealWrapper({ children, className, dir = 'up' }: { children: React.Re
   return <div ref={ref} className={cn(cls, className)}>{children}</div>
 }
 
-// Cards are rendered directly from the central catalog so pricing stays in one place.
-const courses = COURSES
+// Card UI is unchanged — extracted so it can be reused across month groups.
+function CourseCard({ course, index }: { course: Course; index: number }) {
+  return (
+    <RevealWrapper dir="up">
+      <div
+        className="premium-card bg-white rounded-3xl border border-[#E9DFF0] overflow-hidden flex flex-col h-full hover:border-[#9B59B6]/30"
+        style={{ transitionDelay: `${index * 0.06}s` }}
+      >
+        {/* Card header */}
+        <div className="p-6 pb-4" style={{ background: 'linear-gradient(135deg, #F5EFF8, #FFF9F0)' }}>
+          <div className="flex items-start justify-between mb-3">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+              <span className="text-[#9B59B6] font-sans font-bold text-sm">{index + 1}</span>
+            </div>
+            {course.tag && (
+              <span className="font-body text-[10px] font-semibold px-3 py-1 rounded-full text-white uppercase tracking-wider" style={{ background: course.tagColor }}>
+                {course.tag}
+              </span>
+            )}
+          </div>
+          <h3 className="font-sans text-lg font-medium text-[#2D1B3D] leading-snug">{course.title}</h3>
+        </div>
+
+        {/* Meta */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 border-t border-b border-[#E9DFF0] bg-[#FAFAFA]">
+          <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
+            <Clock className="w-3.5 h-3.5" />
+            {course.duration}
+          </div>
+          <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
+            <CalendarClock className="w-3.5 h-3.5" />
+            {course.time}
+          </div>
+          <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
+            <Monitor className="w-3.5 h-3.5" />
+            {course.mode}
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 flex flex-col gap-4 flex-1">
+          <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">{course.desc}</p>
+          <div>
+            <p className="font-body text-xs font-semibold text-[#2D1B3D] uppercase tracking-widest mb-2">Upcoming batches:</p>
+            <div className="flex flex-wrap gap-1.5">
+              {course.dates.map((d) => (
+                <span key={d} className="inline-flex items-center gap-1 font-body text-[11px] text-[#6B2D8B] bg-[#E9DFF0]/60 border border-[#9B59B6]/20 rounded-full px-2.5 py-1">
+                  <CalendarClock className="w-3 h-3" />
+                  {d}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="font-body text-xs font-semibold text-[#2D1B3D] uppercase tracking-widest mb-2">You will learn:</p>
+            <ul className="flex flex-col gap-1.5">
+              {course.highlights.map((h) => (
+                <li key={h} className="flex items-center gap-2 font-body text-xs text-[#6B5B7B]">
+                  <span className="w-1 h-1 rounded-full bg-[#9B59B6] shrink-0" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 pb-6 flex items-center justify-between mt-auto pt-4 border-t border-[#E9DFF0]">
+          <div>
+            <p className="font-body text-xs text-[#9B8BAB]">{course.level}</p>
+            <p className="font-sans text-xl font-semibold text-brand-gradient">{priceLabel(course)}</p>
+          </div>
+          <Link
+            href={`/enroll?course=${course.slug}`}
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#6B2D8B] text-white font-body text-xs font-medium rounded-full hover:bg-[#9B59B6] transition-all"
+          >
+            Enrol <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+      </div>
+    </RevealWrapper>
+  )
+}
+
+function CourseGrid({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{children}</div>
+}
+
+// Section heading shown before each month group / the completed group.
+function GroupHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-4 mb-8 mt-16 first:mt-0">
+      <h3 className="font-sans text-2xl lg:text-3xl font-light text-[#2D1B3D] whitespace-nowrap">
+        {children}
+      </h3>
+      <span className="flex-1 h-px bg-[#E9DFF0]" />
+    </div>
+  )
+}
 
 const workshops = [
   { title: 'Healing Workshops', desc: 'Intensive group healing experiences on specific themes.', icon: Users },
@@ -35,6 +133,16 @@ const workshops = [
 ]
 
 export default function CoursesPage() {
+  // Compute grouping on the client so "today" is always the visitor's real date
+  // (avoids a build-time frozen date). Before mount we render the flat catalog order.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  const schedule = useMemo(
+    () => groupBySchedule(COURSES, getCourseBatches, { isRecurring: isRecurringCourse }),
+    [mounted]
+  )
+
   return (
     <>
       <Navbar />
@@ -60,7 +168,7 @@ export default function CoursesPage() {
           </div>
         </section>
 
-        {/* Courses Grid */}
+        {/* Courses Grid — grouped by upcoming month, completed last */}
         <section className="py-20 bg-[#FFF9F0]">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <RevealWrapper className="text-center mb-14">
@@ -69,88 +177,46 @@ export default function CoursesPage() {
               </h2>
             </RevealWrapper>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {courses.map((course, i) => (
-                <RevealWrapper key={course.id} dir="up">
-                  <div
-                    className="premium-card bg-white rounded-3xl border border-[#E9DFF0] overflow-hidden flex flex-col h-full hover:border-[#9B59B6]/30"
-                    style={{ transitionDelay: `${i * 0.06}s` }}
-                  >
-                    {/* Card header */}
-                    <div className="p-6 pb-4" style={{ background: 'linear-gradient(135deg, #F5EFF8, #FFF9F0)' }}>
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                          <span className="text-[#9B59B6] font-sans font-bold text-sm">{i + 1}</span>
-                        </div>
-                        {course.tag && (
-                          <span className="font-body text-[10px] font-semibold px-3 py-1 rounded-full text-white uppercase tracking-wider" style={{ background: course.tagColor }}>
-                            {course.tag}
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="font-sans text-lg font-medium text-[#2D1B3D] leading-snug">{course.title}</h3>
-                    </div>
-
-                    {/* Meta */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-6 py-3 border-t border-b border-[#E9DFF0] bg-[#FAFAFA]">
-                      <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
-                        <Clock className="w-3.5 h-3.5" />
-                        {course.duration}
-                      </div>
-                      <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
-                        <CalendarClock className="w-3.5 h-3.5" />
-                        {course.time}
-                      </div>
-                      <div className="flex items-center gap-1.5 font-body text-xs text-[#9B8BAB]">
-                        <Monitor className="w-3.5 h-3.5" />
-                        {course.mode}
-                      </div>
-                    </div>
-
-                    {/* Body */}
-                    <div className="p-6 flex flex-col gap-4 flex-1">
-                      <p className="font-body text-sm leading-relaxed text-[#6B5B7B]">{course.desc}</p>
-                      <div>
-                        <p className="font-body text-xs font-semibold text-[#2D1B3D] uppercase tracking-widest mb-2">Upcoming batches:</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {course.dates.map((d) => (
-                            <span key={d} className="inline-flex items-center gap-1 font-body text-[11px] text-[#6B2D8B] bg-[#E9DFF0]/60 border border-[#9B59B6]/20 rounded-full px-2.5 py-1">
-                              <CalendarClock className="w-3 h-3" />
-                              {d}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <p className="font-body text-xs font-semibold text-[#2D1B3D] uppercase tracking-widest mb-2">You will learn:</p>
-                        <ul className="flex flex-col gap-1.5">
-                          {course.highlights.map((h) => (
-                            <li key={h} className="flex items-center gap-2 font-body text-xs text-[#6B5B7B]">
-                              <span className="w-1 h-1 rounded-full bg-[#9B59B6] shrink-0" />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="px-6 pb-6 flex items-center justify-between mt-auto pt-4 border-t border-[#E9DFF0]">
-                      <div>
-                        <p className="font-body text-xs text-[#9B8BAB]">{course.level}</p>
-                        <p className="font-sans text-xl font-semibold text-brand-gradient">{priceLabel(course)}</p>
-                      </div>
-                      <Link
-                        href={`/enroll?course=${course.slug}`}
-                        className="flex items-center gap-1.5 px-4 py-2.5 bg-[#6B2D8B] text-white font-body text-xs font-medium rounded-full hover:bg-[#9B59B6] transition-all"
-                      >
-                        Enrol <ArrowRight className="w-3 h-3" />
-                      </Link>
-                    </div>
+            {!mounted ? (
+              // Pre-mount fallback: flat catalog order (deterministic, no hydration mismatch).
+              <CourseGrid>
+                {COURSES.map((course, i) => (
+                  <CourseCard key={course.id} course={course} index={i} />
+                ))}
+              </CourseGrid>
+            ) : (
+              <>
+                {schedule.upcoming.map((group) => (
+                  <div key={group.key}>
+                    <GroupHeading>
+                      Upcoming in{' '}
+                      <span className="italic text-brand-gradient">
+                        {group.monthName}
+                        {group.year !== new Date().getFullYear() ? ` ${group.year}` : ''}
+                      </span>
+                    </GroupHeading>
+                    <CourseGrid>
+                      {group.items.map((course, i) => (
+                        <CourseCard key={course.id} course={course} index={i} />
+                      ))}
+                    </CourseGrid>
                   </div>
-                </RevealWrapper>
-              ))}
-            </div>
+                ))}
+
+                {schedule.completed.length > 0 && (
+                  <div className="opacity-70">
+                    <GroupHeading>
+                      <span className="text-[#9B8BAB]">Completed Courses</span>
+                    </GroupHeading>
+                    <CourseGrid>
+                      {schedule.completed.map((course, i) => (
+                        <CourseCard key={course.id} course={course} index={i} />
+                      ))}
+                    </CourseGrid>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </section>
 

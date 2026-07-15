@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
+import { groupBySchedule } from '@/lib/course-schedule'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
@@ -90,8 +91,8 @@ const testimonials = [
   },
 ]
 
-// Featured workshops on the home page. `startDate` (ISO, next batch) makes the list
-// sortable so upcoming courses stay on top and past ones sink automatically.
+// Featured workshops on the home page. `upcomingBatches` (ISO dates) drives automatic
+// month grouping — the nearest future batch decides each card's month/position.
 const homeWorkshops = [
   {
     id: '1',
@@ -100,7 +101,7 @@ const homeWorkshops = [
       'A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.',
     image: '/images/standard-lama-healing.jpg',
     date: '8th June – 9th June',
-    startDate: '2026-06-08',
+    upcomingBatches: ['2026-06-08', '2026-09-07', '2026-12-07'],
     language: 'Online',
     price: '₹5,550',
   },
@@ -111,7 +112,7 @@ const homeWorkshops = [
       'Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.',
     image: '/lama-fera-advanced-healing .jpeg',
     date: '10th June – 11th June',
-    startDate: '2026-06-10',
+    upcomingBatches: ['2026-06-10', '2026-09-09', '2026-12-09'],
     language: 'Online',
     price: '₹5,550',
   },
@@ -122,7 +123,7 @@ const homeWorkshops = [
       'Healing childhood wounds and emotional patterns to restore love, trust, and inner harmony.',
     image: '/Relationships & Inner Child Healing 01.png',
     date: '29th June – 3rd July',
-    startDate: '2026-06-29',
+    upcomingBatches: ['2026-06-29', '2026-12-14'],
     language: 'Online',
     price: '₹15,000',
   },
@@ -133,11 +134,73 @@ const homeWorkshops = [
       'An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.',
     image: '/images/past-life-regression.jpg',
     date: '31st July – 7th August',
-    startDate: '2026-07-31',
+    upcomingBatches: ['2026-07-31', '2026-10-30'],
     language: 'Online',
     price: '₹21,600',
   },
 ]
+
+type HomeWorkshop = (typeof homeWorkshops)[number]
+
+// Home workshop card — UI unchanged; `completed` only flips the status badge.
+function HomeWorkshopCard({ workshop, completed }: { workshop: HomeWorkshop; completed: boolean }) {
+  return (
+    <div className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left Image */}
+        <div className="relative lg:w-[36%] h-[260px] p-4">
+          <div className="relative h-full overflow-hidden rounded-tl-[50px] rounded-br-[50px]">
+            <img src={workshop.image} alt={workshop.title} className="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        {/* Right Content */}
+        <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
+          {/* Status badge */}
+          <span
+            className={`inline-flex items-center gap-1.5 w-fit text-xs font-semibold px-3 py-1 rounded-full mb-3 ${
+              completed ? 'bg-[#9B8BAB]/15 text-[#9B8BAB]' : 'bg-[#0B8C87]/10 text-[#0B8C87]'
+            }`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${completed ? 'bg-[#9B8BAB]' : 'bg-[#0B8C87]'}`} />
+            {completed ? 'Completed' : 'Upcoming'}
+          </span>
+
+          {/* Title */}
+          <h3 className="text-2xl lg:text-[38px] font-semibold text-[#2D1B3D] mb-4">{workshop.title}</h3>
+
+          {/* Description */}
+          <p className="text-[#6D6875] text-base leading-relaxed mb-6 max-w-3xl">{workshop.description}</p>
+
+          {/* Info Pills + Register Button */}
+          <div className="flex flex-wrap items-center gap-4 mb-7">
+            {/* Date */}
+            <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
+              <span>📅</span>
+              <span className="text-sm text-[#4A4453]">{workshop.date}</span>
+            </div>
+
+            {/* Language */}
+            <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
+              <span>🌐</span>
+              <span className="text-sm text-[#4A4453]">{workshop.language}</span>
+            </div>
+
+            {/* Register Button → Courses page */}
+            <Link
+              href="/courses"
+              className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 w-fit cursor-pointer bg-[#0B8C87] text-white hover:bg-[#066b67]"
+            >
+              <span className="font-semibold text-lg lg:text-xl">Register Now</span>
+              <span className="w-px h-6 bg-white/30" />
+              <span className="font-bold text-lg lg:text-xl">{workshop.price}</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function RevealWrapper({ children, className, dir = 'up' }: { children: React.ReactNode, className?: string, dir?: 'up' | 'left' | 'right' }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -189,18 +252,14 @@ export default function HomePage() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Upcoming courses first (soonest → latest), past workshops after (most recent first).
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const isUpcoming = (w: (typeof homeWorkshops)[number]) => new Date(w.startDate) >= today
-  const sortedWorkshops = [...homeWorkshops].sort((a, b) => {
-    const da = new Date(a.startDate).getTime()
-    const db = new Date(b.startDate).getTime()
-    const aUp = isUpcoming(a)
-    const bUp = isUpcoming(b)
-    if (aUp !== bUp) return aUp ? -1 : 1
-    return aUp ? da - db : db - da
-  })
+  // Group featured workshops by their next upcoming batch month (client-side so
+  // "today" is the visitor's real date). Pre-mount we show the flat catalog order.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const workshopSchedule = useMemo(
+    () => groupBySchedule(homeWorkshops, (w) => w.upcomingBatches),
+    [mounted]
+  )
 
   return (
     <>
@@ -310,93 +369,52 @@ export default function HomePage() {
       </h2>
     </div>
 
-    {/* Courses */}
-    <div className="space-y-6">
-      {sortedWorkshops.map((workshop) => (
-        <div
-          key={workshop.id}
-          className="max-w-5xl mx-auto bg-[#F7F3F8] border border-[#ECE6EF] rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-        >
-          <div className="flex flex-col lg:flex-row">
-            
-            {/* Left Image */}
-            <div className="relative lg:w-[36%] h-[260px] p-4">
-              <div className="relative h-full overflow-hidden rounded-tl-[50px] rounded-br-[50px]">
-                <img
-                  src={workshop.image}
-                  alt={workshop.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Right Content */}
-            <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
-
-              {/* Status badge */}
-              <span
-                className={`inline-flex items-center gap-1.5 w-fit text-xs font-semibold px-3 py-1 rounded-full mb-3 ${
-                  isUpcoming(workshop)
-                    ? 'bg-[#0B8C87]/10 text-[#0B8C87]'
-                    : 'bg-[#9B8BAB]/15 text-[#9B8BAB]'
-                }`}
-              >
-                <span className={`w-1.5 h-1.5 rounded-full ${isUpcoming(workshop) ? 'bg-[#0B8C87]' : 'bg-[#9B8BAB]'}`} />
-                {isUpcoming(workshop) ? 'Upcoming' : 'Completed'}
-              </span>
-
-              {/* Title */}
-              <h3 className="text-2xl lg:text-[38px] font-semibold text-[#2D1B3D] mb-4">
-                {workshop.title}
+    {/* Courses — grouped by upcoming month, completed last */}
+    {!mounted ? (
+      <div className="space-y-6">
+        {homeWorkshops.map((workshop) => (
+          <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
+        ))}
+      </div>
+    ) : (
+      <>
+        {workshopSchedule.upcoming.map((group) => (
+          <div key={group.key} className="mb-10">
+            <div className="max-w-5xl mx-auto mb-5 flex items-center gap-4">
+              <h3 className="text-xl lg:text-2xl font-light text-[#2D1B3D] whitespace-nowrap">
+                Upcoming in{' '}
+                <span className="italic text-[#8B4BB3]">
+                  {group.monthName}
+                  {group.year !== new Date().getFullYear() ? ` ${group.year}` : ''}
+                </span>
               </h3>
-
-              {/* Description */}
-              <p className="text-[#6D6875] text-base leading-relaxed mb-6 max-w-3xl">
-                {workshop.description}
-              </p>
-
-              {/* Info Pills + Register Button */}
-              <div className="flex flex-wrap items-center gap-4 mb-7">
-                
-                {/* Date */}
-                <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
-                  <span>📅</span>
-                  <span className="text-sm text-[#4A4453]">
-                    {workshop.date}
-                  </span>
-                </div>
-
-                {/* Language */}
-                <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
-                  <span>🌐</span>
-                  <span className="text-sm text-[#4A4453]">
-                    {workshop.language}
-                  </span>
-                </div>
-
-                {/* Register Button → Courses page */}
-                <Link
-                  href="/courses"
-                  className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 w-fit cursor-pointer bg-[#0B8C87] text-white hover:bg-[#066b67]"
-                >
-                  <span className="font-semibold text-lg lg:text-xl">
-                    Register Now
-                  </span>
-
-                  {/* Divider */}
-                  <span className="w-px h-6 bg-white/30" />
-
-                  {/* Price */}
-                  <span className="font-bold text-lg lg:text-xl">
-                    {workshop.price}
-                  </span>
-                </Link>
-              </div>
+              <span className="flex-1 h-px bg-[#E6D9EF]" />
+            </div>
+            <div className="space-y-6">
+              {group.items.map((workshop) => (
+                <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
+              ))}
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+
+        {workshopSchedule.completed.length > 0 && (
+          <div className="mb-4 opacity-70">
+            <div className="max-w-5xl mx-auto mb-5 flex items-center gap-4">
+              <h3 className="text-xl lg:text-2xl font-light text-[#9B8BAB] whitespace-nowrap">
+                Completed Workshops
+              </h3>
+              <span className="flex-1 h-px bg-[#E6D9EF]" />
+            </div>
+            <div className="space-y-6">
+              {workshopSchedule.completed.map((workshop) => (
+                <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={true} />
+              ))}
+            </div>
+          </div>
+        )}
+      </>
+    )}
 
     {/* View All */}
     <div className="text-center mt-6">

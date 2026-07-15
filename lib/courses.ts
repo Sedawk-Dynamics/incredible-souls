@@ -193,6 +193,36 @@ export const COURSES: Course[] = [
   },
 ]
 
+/**
+ * ISO batch dates per course — the machine-readable source used to group courses by
+ * their NEXT upcoming month. Kept alongside the human-readable `dates` chips above.
+ * When a batch passes, grouping advances automatically (no manual edits needed).
+ */
+export const COURSE_BATCHES: Record<string, string[]> = {
+  'karmic-clearance-karuna-reiki': ['2026-07-12', '2026-10-11', '2027-01-10'],
+  'psychic-surgery-psychic-being': ['2026-07-19', '2026-10-18', '2027-01-17'],
+  'money-abundance': ['2026-07-26', '2026-10-25', '2027-01-24'],
+  'standard-lama-healing': ['2026-06-08', '2026-09-07', '2026-12-07'],
+  'advanced-lama-healing': ['2026-06-10', '2026-09-09', '2026-12-09'],
+  'reiki-level-1': ['2026-07-06', '2026-10-05', '2027-01-04'],
+  'reiki-level-2': ['2026-07-07', '2026-10-06', '2027-01-05'],
+  'harmony-zero-state': ['2026-07-26', '2026-10-25', '2027-01-24'],
+  'relationships-inner-child-healing': ['2026-06-29', '2026-12-14'],
+  'past-life-regression-therapy': ['2026-07-31', '2026-10-30'],
+  'free-weekend-meditation': [], // recurring — handled via RECURRING_COURSE_IDS
+}
+
+/** Courses that run on a rolling/recurring schedule (always treated as current-month). */
+export const RECURRING_COURSE_IDS = new Set<string>(['free-weekend-meditation'])
+
+export function getCourseBatches(course: Pick<Course, 'id'>): string[] {
+  return COURSE_BATCHES[course.id] ?? []
+}
+
+export function isRecurringCourse(course: Pick<Course, 'id'>): boolean {
+  return RECURRING_COURSE_IDS.has(course.id)
+}
+
 /** Look up a course by its slug/id. Returns undefined when not found. */
 export function getCourseBySlug(slug: string | null | undefined): Course | undefined {
   if (!slug) return undefined
