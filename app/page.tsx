@@ -402,25 +402,14 @@ export default function HomePage() {
       </div>
     ) : (
       <>
-        {workshopSchedule.upcoming.map((group) => (
-          <div key={group.key} className="mb-10">
-            <div className="max-w-5xl mx-auto mb-5 flex items-center gap-4">
-              <h3 className="text-xl lg:text-2xl font-light text-[#2D1B3D] whitespace-nowrap">
-                Upcoming in{' '}
-                <span className="italic text-[#8B4BB3]">
-                  {group.monthName}
-                  {group.year !== new Date().getFullYear() ? ` ${group.year}` : ''}
-                </span>
-              </h3>
-              <span className="flex-1 h-px bg-[#E6D9EF]" />
-            </div>
-            <div className="space-y-6">
-              {group.items.map((workshop) => (
-                <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
-              ))}
-            </div>
-          </div>
-        ))}
+        <div className="space-y-6">
+          {workshopSchedule.upcoming.flatMap((group) =>
+            group.items.map((workshop) => (
+              <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
+            ))
+          )}
+        </div>
+
 
         {workshopSchedule.completed.length > 0 && (
           <div className="mb-4 opacity-70">
