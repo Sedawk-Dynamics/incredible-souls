@@ -27,6 +27,18 @@ const healingLinks = [
   // { href: 'https://academy.incrediblesouls.co.in/product/healing-powders/', label: 'All Healing Services' },
 ]
 
+const legalLinks = [
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/comment-policy', label: 'Comment Policy' },
+  { href: '/refund-policy', label: 'Refund Policy' },
+  { href: '/disclaimer', label: 'Disclaimer' },
+  { href: '/disclosure', label: 'Disclosure' },
+  { href: '/terms-and-conditions', label: 'Terms & Conditions' },
+  { href: '/shipping-delivery', label: 'Address & Shipping' },
+  { href: '/copyright', label: 'Copyright' },
+  { href: '/contact', label: 'Contact Us' },
+]
+
 export default function Footer() {
   return (
     <footer className="bg-white text-[#2D1B3D] border-t border-[#E9DFF0]">
@@ -177,6 +189,25 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Legal Links */}
+      <div className="border-t border-[#E9DFF0]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
+          <nav className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2">
+            {legalLinks.map((link, i) => (
+              <span key={link.href} className="flex items-center gap-x-2.5">
+                <Link
+                  href={link.href}
+                  className="font-body text-sm font-semibold text-[#2D1B3D] hover:text-[#9B59B6] transition-colors"
+                >
+                  {link.label}
+                </Link>
+                {i < legalLinks.length - 1 && <span className="text-[#D9CDE6]">|</span>}
+              </span>
+            ))}
+          </nav>
         </div>
       </div>
 
