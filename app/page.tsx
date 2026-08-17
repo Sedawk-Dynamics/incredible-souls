@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { groupBySchedule } from '@/lib/course-schedule'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
@@ -91,80 +90,48 @@ const testimonials = [
   },
 ]
 
-// Featured workshops on the home page. Each batch carries its ISO date (for grouping)
-// AND its display label, so the card always shows the NEAREST upcoming batch's date.
+// Featured workshops on the home page — August & September batches only.
+// Grouped under their month heading; other months are intentionally hidden here.
 const homeWorkshops = [
   {
-    id: 'psychic-surgery-psychic-being',
-    title: 'Psychic Surgery & Psychic Being',
-    description:
-      'An advanced healing course that teaches the art of psychic surgery — removing energetic blockages, entities and trauma from the auric field at the deepest levels.',
-    image: '/Psychic Surgery & Psychic Being.webp',
-    batches: [
-      { iso: '2026-07-19', label: '19th July' },
-      { iso: '2026-10-18', label: '18th Oct' },
-      { iso: '2027-01-17', label: '17th Jan' },
-    ],
-    language: 'Online',
-    price: '₹6,300',
-  },
-  {
-    id: 'money-abundance',
-    title: 'Money & Abundance',
-    description:
-      'Break free from scarcity mindset and karmic money blocks. Align your energy with the natural flow of abundance through spiritual and practical tools.',
-    image: '/Money abundance.webp',
-    batches: [
-      { iso: '2026-07-26', label: '26th July' },
-      { iso: '2026-10-25', label: '25th Oct' },
-      { iso: '2027-01-24', label: '24th Jan' },
-    ],
-    language: 'Online',
-    price: '₹3,459',
-  },
-  {
-    id: 'harmony-zero-state',
-    title: 'Harmony & Zero State',
-    description:
-      'Return to your natural state of zero — a place of complete harmony, stillness and inner peace. Learn powerful techniques to reset your energetic frequency.',
-    image: '/Harmony & Zero Stat.jpeg',
-    batches: [
-      { iso: '2026-07-26', label: '26th July' },
-      { iso: '2026-10-25', label: '25th Oct' },
-      { iso: '2027-01-24', label: '24th Jan' },
-    ],
-    language: 'Online',
-    price: '₹3,459',
-  },
-  {
     id: 'past-life-regression-therapy',
+    month: 'August',
     title: 'Past Life Regression Therapy Course',
     description:
       'An 8-day transformative journey into Past Life Regression to heal karmic patterns, release emotional blocks, awaken intuition, and reconnect with your soul wisdom.',
     image: '/images/past-life-regression.jpg',
-    batches: [
-      { iso: '2026-07-31', label: '31st July – 7th Aug' },
-      { iso: '2026-10-30', label: '30th Oct – 6th Nov' },
-    ],
+    date: '31st July – 7th Aug',
     language: 'Online',
     price: '₹21,600',
+  },
+  {
+    id: 'standard-lama-healing',
+    month: 'September',
+    title: 'Standard Lama Healing',
+    description:
+      'A foundational introduction to Lama Fera Healing with chakra science, healing techniques, and six sacred symbols for self and others energy healing.',
+    image: '/images/standard-lama-healing.jpg',
+    date: '7th – 8th Sept',
+    language: 'Online',
+    price: '₹5,550',
+  },
+  {
+    id: 'advanced-lama-healing',
+    month: 'September',
+    title: 'Advanced Lama Healing',
+    description:
+      'Advanced Lama Fera healing with powerful symbols for deep emotional, karmic, and energetic cleansing.',
+    image: '/lama-fera-advanced-healing .jpeg',
+    date: '9th – 10th Sept',
+    language: 'Online',
+    price: '₹5,550',
   },
 ]
 
 type HomeWorkshop = (typeof homeWorkshops)[number]
 
-// Date shown on a card = the nearest upcoming batch's label; if all have passed,
-// fall back to the most recent past batch.
-function displayBatchLabel(workshop: HomeWorkshop): string {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const upcoming = workshop.batches
-    .filter((b) => new Date(b.iso).getTime() >= today.getTime())
-    .sort((a, b) => new Date(a.iso).getTime() - new Date(b.iso).getTime())
-  if (upcoming.length) return upcoming[0].label
-  const past = [...workshop.batches].sort((a, b) => new Date(b.iso).getTime() - new Date(a.iso).getTime())
-  return past[0]?.label ?? ''
-}
+// Month sections to display, in order. Only these months are shown.
+const HOME_WORKSHOP_MONTHS = ['August', 'September']
 
 // Home workshop card — UI unchanged; `completed` only flips the status badge.
 function HomeWorkshopCard({ workshop, completed }: { workshop: HomeWorkshop; completed: boolean }) {
@@ -198,10 +165,10 @@ function HomeWorkshopCard({ workshop, completed }: { workshop: HomeWorkshop; com
 
           {/* Info Pills + Register Button */}
           <div className="flex flex-wrap items-center gap-4 mb-7">
-            {/* Date — nearest upcoming batch */}
+            {/* Date */}
             <div className="bg-white border border-[#E7E0EC] rounded-2xl px-5 py-3 flex items-center gap-2 shadow-sm">
               <span>📅</span>
-              <span className="text-sm text-[#4A4453]">{displayBatchLabel(workshop)}</span>
+              <span className="text-sm text-[#4A4453]">{workshop.date}</span>
             </div>
 
             {/* Language */}
@@ -275,15 +242,6 @@ export default function HomePage() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
-
-  // Group featured workshops by their next upcoming batch month (client-side so
-  // "today" is the visitor's real date). Pre-mount we show the flat catalog order.
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  const workshopSchedule = useMemo(
-    () => groupBySchedule(homeWorkshops, (w) => w.batches.map((b) => b.iso)),
-    [mounted]
-  )
 
   return (
     <>
@@ -393,41 +351,26 @@ export default function HomePage() {
       </h2>
     </div>
 
-    {/* Courses — grouped by upcoming month, completed last */}
-    {!mounted ? (
-      <div className="space-y-6">
-        {homeWorkshops.map((workshop) => (
-          <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
-        ))}
-      </div>
-    ) : (
-      <>
-        <div className="space-y-6">
-          {workshopSchedule.upcoming.flatMap((group) =>
-            group.items.map((workshop) => (
-              <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
-            ))
-          )}
-        </div>
-
-
-        {workshopSchedule.completed.length > 0 && (
-          <div className="mb-4 opacity-70">
-            <div className="max-w-5xl mx-auto mb-5 flex items-center gap-4">
-              <h3 className="text-xl lg:text-2xl font-light text-[#9B8BAB] whitespace-nowrap">
-                Completed Workshops
-              </h3>
-              <span className="flex-1 h-px bg-[#E6D9EF]" />
-            </div>
-            <div className="space-y-6">
-              {workshopSchedule.completed.map((workshop) => (
-                <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={true} />
-              ))}
-            </div>
+    {/* Courses — August & September month sections only */}
+    {HOME_WORKSHOP_MONTHS.map((month) => {
+      const items = homeWorkshops.filter((w) => w.month === month)
+      if (items.length === 0) return null
+      return (
+        <div key={month} className="mb-10">
+          <div className="max-w-5xl mx-auto mb-5 flex items-center gap-4">
+            <h3 className="text-xl lg:text-2xl font-light text-[#2D1B3D] whitespace-nowrap">
+              Upcoming in <span className="italic text-[#8B4BB3]">{month}</span>
+            </h3>
+            <span className="flex-1 h-px bg-[#E6D9EF]" />
           </div>
-        )}
-      </>
-    )}
+          <div className="space-y-6">
+            {items.map((workshop) => (
+              <HomeWorkshopCard key={workshop.id} workshop={workshop} completed={false} />
+            ))}
+          </div>
+        </div>
+      )
+    })}
 
     {/* View All */}
     <div className="text-center mt-6">
